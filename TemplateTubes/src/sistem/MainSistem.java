@@ -4,11 +4,15 @@
  * and open the template in the editor.
  */
 package sistem;
-
+import view.Login;
 /**
  *
  * @author kevin
  */
+import dao.ConnectionManager;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 public class MainSistem {
     
     public static void main(String[] args) {
@@ -16,6 +20,9 @@ public class MainSistem {
         KotakSaran kotakSaran = new KotakSaran();
         Roster roster = new Roster();
         KehadiranSatuSemesterPerMahasiswa kehadiran1SemPerMhs = new KehadiranSatuSemesterPerMahasiswa();
+        
+        new Login().setVisible(true);
+        
     }
     
 }
