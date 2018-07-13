@@ -12,7 +12,13 @@ package sistem;
 public class Mahasiswa extends Orang{
     private int tahunMasuk, totSks;
     private float ipk;
-
+    
+    public Mahasiswa(String nama, String id, String password){
+        super.setId(id);
+        super.setNama(nama);
+        super.setPassword(password);
+    }
+    
     public int getTahunMasuk() {
         return tahunMasuk;
     }

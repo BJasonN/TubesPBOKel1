@@ -13,6 +13,11 @@ import java.util.HashMap;
 import java.util.LinkedList;
 public class Dosen extends Orang{
     private HashMap<Integer, LinkedList<NilaiSatuSemesterPerMahasiswa>> nilaiAngkatan;
+    public Dosen(String id, String nama, String password){
+        super.setNama(nama);
+        super.setId(id);
+        super.setPassword(password);
+    }
 
     public HashMap<Integer, LinkedList<NilaiSatuSemesterPerMahasiswa>> getNilaiAngkatan() {
         return nilaiAngkatan;
