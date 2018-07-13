@@ -1,3 +1,5 @@
+package view;
+
 
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -26,8 +28,8 @@ import javax.swing.WindowConstants;
  *
  * @author Jason
  */
-public class Kehadiran extends JFrame{
-    public Kehadiran(){
+public class LihatNilai extends JFrame{
+    public LihatNilai(){
         initComponents();
     }
     
@@ -36,7 +38,7 @@ public class Kehadiran extends JFrame{
         this.setSize(1000, 600);
         this.setLocationRelativeTo(null);
         getContentPane().setLayout(null);
-        this.setTitle("Kehadiran");
+        this.setTitle("Nilai");
         
         pnlUtama = new JPanel();
         pnlUtama.setBounds(0, 0, 1000, 250);
@@ -51,9 +53,9 @@ public class Kehadiran extends JFrame{
         add(pnlIsi);
         pnlIsi.setLayout(null);
         
-        lblKehadiran = new JLabel("Kehadiran");
-        lblKehadiran.setBounds(170, 40, 400, 50);
-        pnlIsi.add(lblKehadiran);
+        lblLihat = new JLabel("Lihat Nilai");
+        lblLihat.setBounds(170, 40, 400, 50);
+        pnlIsi.add(lblLihat);
         
         Object[] sem = {"Ganjil", "Genap", "Pendek"};
         cbbSem = new JComboBox(sem);
@@ -65,11 +67,12 @@ public class Kehadiran extends JFrame{
         cbbThnSem.setBounds(150, 125, 100, 25);
         pnlIsi.add(cbbThnSem);
         
-        Object[] header = {"Matkul", "Dosen", "Kehadiran", "Presentase"};
+        Object[] header = {"Matkul", "1", "2", "3", "4", "5", "UTS", "UAS", "AA", "Index"};
         Object[][] isiPerRow = {
-                               {"PBO", "Ria Chaniago", "11/11", "100%"},
-                               {"PBO", "Ria Chaniago", "11/11", "100%"},
-                               {"PBO", "Ria Chaniago", "11/11", "100%"}
+                               {"PBO", "100", "100", "100", "100", "100", "100", "100", "100", "A"},
+                               {"PBO", "100", "100", "100", "100", "100", "100", "100", "100", "A"},
+                               {"PBO", "100", "100", "100", "100", "100", "100", "100", "100", "A"},
+                               {"PBO", "100", "100", "100", "100", "100", "100", "100", "100", "A"},
                                };
         
         btnSubmit = new JButton("Submit");
@@ -77,14 +80,13 @@ public class Kehadiran extends JFrame{
         btnSubmit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tblKehadiran = new JTable(isiPerRow, header);
-                scroll = new JScrollPane(tblKehadiran);
+                tblLihatNilai = new JTable(isiPerRow, header);
+                scroll = new JScrollPane(tblLihatNilai);
                 scroll.setBounds(400, 40, 400, 100);
                 pnlIsi.add(scroll);
             }
         });
         pnlIsi.add(btnSubmit);
-        
     }
     private Image resizeImage(String url){
         Image dimg = null;
@@ -96,14 +98,14 @@ public class Kehadiran extends JFrame{
         }
         return dimg;
     }
-
+    
     private JPanel pnlUtama;
     private JPanel pnlIsi;
     private JLabel lblJudul;
-    private JLabel lblKehadiran;
+    private JLabel lblLihat;
     private JComboBox cbbThnSem;
     private JComboBox cbbSem;
-    private JTable tblKehadiran;
+    private JTable tblLihatNilai;
     private JScrollPane scroll;
     private JButton btnSubmit;
 }

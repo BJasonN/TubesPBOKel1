@@ -1,3 +1,5 @@
+package view;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -21,17 +23,18 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 /**
  *
  * @author Sutanto
  */
-public class InputMatkulDosen extends JFrame{
-    public InputMatkulDosen(){
+public class MhsSaran extends JFrame{
+    public MhsSaran(){
         initComponents();
     }
-    
     private void initComponents() {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setSize(1000, 600);
@@ -51,57 +54,47 @@ public class InputMatkulDosen extends JFrame{
         add(pnl1);
         pnl1.setLayout(null);
         
-        lblinputmatkul = new JLabel("Input Matkul Dosen");
-        pnl1.add(lblinputmatkul);
-        lblinputmatkul.setBounds(400,250 , 250, 50);
-        lblinputmatkul.setFont(new Font("Arial",Font.BOLD,18));
+        saran = new JLabel("Saran");
+        pnl1.add(saran);
+        saran.setBounds(470,250 , 250, 50);
+        saran.setFont(new Font("Arial",Font.BOLD,18));
         
-        lbldosen= new JLabel("Dosen : ");
-        pnl1.add(lbldosen);
-        lbldosen.setBounds(380,300, 100, 30);
-        lbldosen.setFont(new Font("Arial",Font.BOLD,15));
-        dosen= new JComboBox();
-        dosen.setBounds(480,300 , 100, 20);
-        pnl1.add(dosen);
+        lblnim= new JLabel("Nim : ");
+        pnl1.add(lblnim);
+        lblnim.setBounds(350,300, 100, 30);
+        lblnim.setFont(new Font("Arial",Font.PLAIN,15));
+        nim= new JTextField();
+        nim.setBounds(450,300 , 100, 20);
+        pnl1.add(nim);
         
         
-        lblmatkul = new JLabel("Mata Kuliah : ");
-        pnl1.add(lblmatkul);
-        lblmatkul.setBounds(380,350, 100, 30);
-        lblmatkul.setFont(new Font("Arial",Font.BOLD,15));
-        matkul= new JComboBox();
-        matkul.setBounds(480,350, 100, 20);
-        pnl1.add(matkul);
+        lblmahasiswa = new JLabel("Mahasiswa : ");
+        pnl1.add(lblmahasiswa);
+        lblmahasiswa.setBounds(350,350, 100, 30);
+        lblmahasiswa.setFont(new Font("Arial",Font.PLAIN,15));
+        mhs= new JTextField();
+        mhs.setBounds(450,350, 100, 20);
+        pnl1.add(mhs);
         
-        lblsemester = new JLabel("Semester : ");
-        pnl1.add(lblsemester);
-        lblsemester.setBounds(380,400, 100, 30);
-        lblsemester.setFont(new Font("Arial",Font.BOLD,15));
-        semester= new JComboBox();
-        semester.setBounds(480,400, 100, 20);
-        pnl1.add(semester);
+        lblsaranmhs = new JLabel("Saran : ");
+        pnl1.add(lblsaranmhs);
+        lblsaranmhs.setBounds(350,400, 100, 30);
+        lblsaranmhs.setFont(new Font("Arial",Font.PLAIN,15));
+        saranmhs= new JTextArea();
+        saranmhs.setBounds(450,400, 200, 80);
+        pnl1.add(saranmhs);
         
         submit= new JButton("submit");
-        submit.setBounds(360,450, 100, 20);
+        submit.setBounds(450,500, 100, 20);
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diinput!");
+                dispose();
+                new JFrameMahasiswa().setVisible(true);
             }
         });
         pnl1.add(submit);
-        
-        back= new JButton("back");
-        back.setBounds(500,450, 100, 20);
-        back.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                new Admin().setVisible(true);
-            }
-        });
-        pnl1.add(back);
-        
         
     }
     private Image resizeImage(String url){
@@ -115,16 +108,15 @@ public class InputMatkulDosen extends JFrame{
         return dimg;
     }
     
-    JPanel pnl1;
     JPanel pnlUtama;
+    JPanel pnl1;
     JLabel lblJudul;
-    JLabel lblinputmatkul;
-    JLabel lblmatkul;
-    JLabel lbldosen;
-    JLabel lblsemester;
+    JLabel saran;
+    JLabel lblmahasiswa;
+    JLabel lblnim;
+    JLabel lblsaranmhs;
     JButton submit;
-    JButton back;
-    JComboBox dosen;
-    JComboBox matkul;
-    JComboBox semester;
+    JTextField nim;
+    JTextField mhs;
+    JTextArea saranmhs;
 }

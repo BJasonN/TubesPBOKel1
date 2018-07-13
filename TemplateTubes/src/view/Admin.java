@@ -1,3 +1,7 @@
+package view;
+
+
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,8 +27,8 @@ import javax.swing.WindowConstants;
  *
  * @author Jason
  */
-public class Dosen extends JFrame{
-    public Dosen(){
+public class Admin extends JFrame{
+    public Admin(){
         initComponents();
     }
     
@@ -33,7 +37,7 @@ public class Dosen extends JFrame{
         this.setSize(1000, 600);
         this.setLocationRelativeTo(null);
         getContentPane().setLayout(null);
-        this.setTitle("Dosen");
+        this.setTitle("Admin");
         
         pnlUtama = new JPanel();
         pnlUtama.setBounds(0, 0, 1000, 250);
@@ -48,54 +52,67 @@ public class Dosen extends JFrame{
         add(pnlIsi);
         pnlIsi.setLayout(null);
         
-        lblDosen = new JLabel("Dosen");
-        lblDosen.setBounds(480, 40, 400, 50);
-        pnlIsi.add(lblDosen);
+        lblAdmin = new JLabel("Admin");
+        lblAdmin.setBounds(480, 40, 400, 50);
+        pnlIsi.add(lblAdmin);
         
-        btnKehadiran = new JButton("Kehadiran");
-        btnKehadiran.setBounds(150, 100, 300, 25);
-        btnKehadiran.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new Kehadiran().setVisible(true);
-            }
-        });
-        pnlIsi.add(btnKehadiran);
-        
-        btnInputNilai = new JButton("Input Nilai");
-        btnInputNilai.setBounds(150, 150, 300, 25);
-        btnInputNilai.addActionListener(new ActionListener() {
+        btnAddDel = new JButton("Add/Delete");
+        btnAddDel.setBounds(150, 100, 300, 25);
+        btnAddDel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new InputNilai().setVisible(true);
+                new AddDelUser().setVisible(true);
             }
         });
-        pnlIsi.add(btnInputNilai);
+        pnlIsi.add(btnAddDel);
         
-        btnInputPrsn = new JButton("Set Persentase");
-        btnInputPrsn.setBounds(150, 200, 300, 25);
-        btnInputPrsn.addActionListener(new ActionListener() {
+        btnInputMatkulMhs = new JButton("Input Matkul Mahasiswa");
+        btnInputMatkulMhs.setBounds(150, 150, 300, 25);
+        btnInputMatkulMhs.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new SetPersentase().setVisible(true);
+                new InputMatkulMhs().setVisible(true); 
             }
-        } );
-        pnlIsi.add(btnInputPrsn);
+        });
+        pnlIsi.add(btnInputMatkulMhs);
         
-        btnRoster = new JButton("Roster");
-        btnRoster.setBounds(550, 100, 300, 25);
-        btnRoster.addActionListener(new ActionListener() {
+        btnInputMatkulDosen = new JButton("Input Matkul Dosen");
+        btnInputMatkulDosen.setBounds(150, 200, 300, 25);
+        btnInputMatkulDosen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new LiatRoster().setVisible(true);
+                dispose();
+                new InputMatkulDosen().setVisible(true);
             }
-        } );
-        pnlIsi.add(btnRoster);
+        });
+        pnlIsi.add(btnInputMatkulDosen);
+        
+        btnEditRoster = new JButton("Edit Roster");
+        btnEditRoster.setBounds(550, 100, 300, 25);
+        btnEditRoster.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new EditRoster().setVisible(true);
+            }
+        });
+        pnlIsi.add(btnEditRoster);
+        
+        btnTambahMatkul = new JButton("Tambah Matkul");
+        btnTambahMatkul.setBounds(550, 150, 300, 25);
+        btnTambahMatkul.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new TambahMatkul().setVisible(true);
+            }
+        });
+        pnlIsi.add(btnTambahMatkul);
         
         btnLogOut = new JButton("Log Out");
-        btnLogOut.setBounds(550, 150, 300, 25);
+        btnLogOut.setBounds(550, 200, 300, 25);
         btnLogOut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -118,14 +135,15 @@ public class Dosen extends JFrame{
         }
         return dimg;
     }
- 
+    
     private JPanel pnlUtama;
     private JPanel pnlIsi;
     private JLabel lblJudul;
-    private JLabel lblDosen;
-    private JButton btnKehadiran;
-    private JButton btnInputNilai;
+    private JLabel lblAdmin;
+    private JButton btnAddDel;
+    private JButton btnInputMatkulMhs;
     private JButton btnLogOut;
-    private JButton btnInputPrsn;
-    private JButton btnRoster;
+    private JButton btnEditRoster;
+    private JButton btnInputMatkulDosen;
+    private JButton btnTambahMatkul;
 }
