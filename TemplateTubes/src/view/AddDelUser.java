@@ -11,6 +11,8 @@ import sistem.Mahasiswa;
  *
  * @author kevin
  */
+import dao.DataAkses;
+
 import dao.ConnectionManager;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -26,7 +28,10 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 public class AddDelUser extends JFrame {
 
@@ -97,10 +102,10 @@ public class AddDelUser extends JFrame {
                 String nama = txtNama.getText();
                 String id = txtId.getText();
                 String password = nama + id;
-                char radioText='N';
-                if(rbtnFemale.isSelected()){
+                char radioText = 'N';//get text from radio
+                if (rbtnFemale.isSelected()) {
                     radioText = 'F';
-                }else {
+                } else {
                     radioText = 'M';
                 }
                 System.out.println(radioText);
@@ -110,15 +115,19 @@ public class AddDelUser extends JFrame {
                     try {
                         Statement st = con.createStatement();
                         String sql = "insert into mahasiswalogin(nama,nim,password,gender)"
-                                + "values('" + nama + "','" + id + "','" + password + "','"+radioText+"');";
+                                + "values('" + nama + "','" + id + "','" + password + "','" + radioText + "');";
                         st.execute(sql);
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
-                }else{
-                    
-                }
+                } else {
 
+                }
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diinput!");
             }
         });
@@ -143,12 +152,22 @@ public class AddDelUser extends JFrame {
         lblDellUser.setLocation(445, 140);
         pnlIsi.add(lblDellUser);
 
-        cbbPilihan = new JComboBox(arrPilihan);
-        cbbPilihan.setSize(170, 20);
-        cbbPilihan.setLocation(400, 210);
-        pnlIsi.add(cbbPilihan);
+        cbbPilihan2 = new JComboBox(arrPilihan);
+        cbbPilihan2.setSize(170, 20);
+        cbbPilihan2.setLocation(400, 210);
+        pnlIsi.add(cbbPilihan2);
+        String[] arrNama;
+        cbbPilihan2.addActionListener(new ActionListener() {
+            DataAkses data = new DataAkses();
 
-        Object[] arrNama = {"nama1", "nama2"};
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                List<String> lNama = data.getNama("Mahasiswa");
+                arrNama = lNama.toArray(new String[lNama.size()]);
+            }
+        }
+        );
+
         cbbNama = new JComboBox(arrNama);
         cbbNama.setSize(170, 20);
         cbbNama.setLocation(400, 240);
@@ -161,6 +180,11 @@ public class AddDelUser extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus!");
+                Connection con = ConnectionManager.getConnection();
+                Object pilihan = cbbPilihan2.getSelectedItem();
+                if (pilihan.equals("Mahasiswa")) {
+
+                }
             }
         });
         pnlIsi.add(btnSubmitDell);
@@ -206,9 +230,10 @@ public class AddDelUser extends JFrame {
 
     private JLabel lblDellUser;
     private JComboBox cbbPilihan;
+    private JComboBox cbbPilihan2;
     private JComboBox cbbNama;
     private JButton btnSubmitDell;
 
     private JButton back;
-    
+
 }

@@ -9,12 +9,32 @@ package dao;
  *
  * @author USER
  */
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DataAkses {
-    
+
+    public List<String> getNama(String pilih) throws SQLException {
+        List<String> lNama = new ArrayList<>();
+        if (pilih.equals("Mahasiswa")) {
+            try {
+                Connection con = ConnectionManager.getConnection();
+                String sql = "select * from mahasiswalogin";
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+
+                while (rs.next()) {
+                    lNama.add(rs.getString(1));
+                }
+            }catch(SQLException ex){
+                ex.printStackTrace();
+            }
+        }
+        return lNama;
+    }
 }
