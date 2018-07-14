@@ -26,6 +26,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.util.Enumeration;
 
 public class AddDelUser extends JFrame {
 
@@ -96,13 +97,20 @@ public class AddDelUser extends JFrame {
                 String nama = txtNama.getText();
                 String id = txtId.getText();
                 String password = nama + id;
+                char radioText='N';
+                if(rbtnFemale.isSelected()){
+                    radioText = 'F';
+                }else {
+                    radioText = 'M';
+                }
+                System.out.println(radioText);
 
                 Object pilihan = cbbPilihan.getSelectedItem();
                 if (pilihan.equals("Mahasiswa")) {
                     try {
                         Statement st = con.createStatement();
-                        String sql = "insert into mahasiswalogin(nama,nim,password)"
-                                + "values('" + nama + "','" + id + "','" + password + "');";
+                        String sql = "insert into mahasiswalogin(nama,nim,password,gender)"
+                                + "values('" + nama + "','" + id + "','" + password + "','"+radioText+"');";
                         st.execute(sql);
                     } catch (SQLException ex) {
                         ex.printStackTrace();
@@ -202,4 +210,5 @@ public class AddDelUser extends JFrame {
     private JButton btnSubmitDell;
 
     private JButton back;
+    
 }
