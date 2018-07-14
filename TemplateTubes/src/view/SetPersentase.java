@@ -116,6 +116,13 @@ public class SetPersentase extends JFrame{
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                
+                String smatkul= (String) matkul.getSelectedItem();
+                float ptugas=Float.parseFloat(tugas.getText());
+                float pkuis =Float.parseFloat(kuis.getText());
+                float puts =Float.parseFloat(uts.getText());
+                float puas =Float.parseFloat(uas.getText());
+                
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diinput!");
             }
         });
