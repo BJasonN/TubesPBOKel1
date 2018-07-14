@@ -32,6 +32,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+import sistem.MainSistem;
 
 /**
  *
@@ -119,6 +120,8 @@ public class Login extends JFrame{
                             JOptionPane.showMessageDialog(null, "ID salah");
                         }else{
                             if(spassword.equals(pass)){
+                                MainSistem.id=nim;
+                                System.out.println(MainSistem.id);
                                 dispose();
                                 new JFrameMahasiswa().setVisible(true);
                             }else{
