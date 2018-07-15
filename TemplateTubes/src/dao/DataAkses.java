@@ -83,4 +83,22 @@ public class DataAkses {
         }
         return ListData;
     }
+    
+    public static void delUser(String pilihan, String nama){
+        
+        System.out.println(pilihan + nama);
+        if(pilihan.equals("Mahasiswa")){
+            System.out.println("sda");
+            try{
+                Connection con = ConnectionManager.getConnection();
+                Statement st = con.createStatement();
+                String sql = "delete from mahasiswalogin where nama='"+nama+"'";
+                st.executeUpdate(sql);
+            }catch(SQLException ex){
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+    
 }

@@ -94,7 +94,8 @@ public class AddDelUser extends JFrame {
         cbbPilihan.setSize(170, 20);
         cbbPilihan.setLocation(400, 100);
         pnlIsi.add(cbbPilihan);
-
+        
+        //submit cuma bisa sekali
         btnSubmitAdd = new JButton("Submit");
         btnSubmitAdd.setSize(170, 20);
         btnSubmitAdd.setLocation(400, 130);
@@ -111,7 +112,7 @@ public class AddDelUser extends JFrame {
                 } else {
                     radioText = 'M';
                 }
-                System.out.println(radioText);
+                
 
                 Object pilihan = cbbPilihan.getSelectedItem();
                 if (pilihan.equals("Mahasiswa")) {
@@ -191,11 +192,9 @@ public class AddDelUser extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus!");
-                Connection con = ConnectionManager.getConnection();
+                //ga ada error tapi gabisa ngehapus
                 Object pilihan = cbbPilihan2.getSelectedItem();
-                if (pilihan.equals("Mahasiswa")) {
-
-                }
+                DataAkses.delUser(String.valueOf(cbbNama.getSelectedItem()),String.valueOf(cbbPilihan2.getSelectedItem()));
             }
         });
         pnlIsi.add(btnSubmitDell);
@@ -221,6 +220,10 @@ public class AddDelUser extends JFrame {
             ex.printStackTrace(System.err);
         }
         return dimg;
+    }
+    
+    public static void main(String[] args) {
+        new AddDelUser().setVisible(true);
     }
 
     private JPanel pnlUtama;
