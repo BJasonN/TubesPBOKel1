@@ -19,7 +19,7 @@ import java.util.List;
 
 public class DataAkses {
 
-    public List<String> getNama(String pilih) throws SQLException {
+    public static List<String> getNama(String pilih) {
         List<String> lNama = new ArrayList<>();
         if (pilih.equals("Mahasiswa")) {
             try {

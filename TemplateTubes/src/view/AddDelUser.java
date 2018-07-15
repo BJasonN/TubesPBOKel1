@@ -31,7 +31,10 @@ import java.awt.image.BufferedImage;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AddDelUser extends JFrame {
 
@@ -156,22 +159,29 @@ public class AddDelUser extends JFrame {
         cbbPilihan2.setSize(170, 20);
         cbbPilihan2.setLocation(400, 210);
         pnlIsi.add(cbbPilihan2);
-        String[] arrNama;
-        cbbPilihan2.addActionListener(new ActionListener() {
-            DataAkses data = new DataAkses();
-
+        
+//        String[] arrNama = {""};
+//        cbbNama = new JComboBox();
+//        cbbNama.setSize(170, 20);
+//        cbbNama.setLocation(400, 240);
+//        pnlIsi.add(cbbNama);
+        
+        btnCari = new JButton("Search");
+        btnCari.setBounds(580,240,170,20);
+        btnCari.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<String> lNama = data.getNama("Mahasiswa");
-                arrNama = lNama.toArray(new String[lNama.size()]);
+                
+                    List<String> lNama = DataAkses.getNama("Mahasiswa");
+                    String[] arrNama = lNama.toArray(new String[lNama.size()]);
+                    cbbNama = new JComboBox();
+                    cbbNama.setSize(170, 20);
+                    cbbNama.setLocation(400, 240);
+                    pnlIsi.add(cbbNama);
+                
             }
-        }
-        );
-
-        cbbNama = new JComboBox(arrNama);
-        cbbNama.setSize(170, 20);
-        cbbNama.setLocation(400, 240);
-        pnlIsi.add(cbbNama);
+        });
+        pnlIsi.add(btnCari);
 
         btnSubmitDell = new JButton("Delete");
         btnSubmitDell.setSize(170, 20);
@@ -233,6 +243,7 @@ public class AddDelUser extends JFrame {
     private JComboBox cbbPilihan2;
     private JComboBox cbbNama;
     private JButton btnSubmitDell;
+    private JButton btnCari;
 
     private JButton back;
 
