@@ -144,7 +144,8 @@ public class AddDelUser extends JFrame {
         rbtnMale.setLocation(600, 65);
         rbtnMale.setSize(170, 20);
         pnlIsi.add(rbtnMale);
-
+        
+        //radio button buat gender
         gender = new ButtonGroup();
         gender.add(rbtnMale);
         gender.add(rbtnFemale);
@@ -154,7 +155,8 @@ public class AddDelUser extends JFrame {
         lblDellUser.setSize(200, 100);
         lblDellUser.setLocation(445, 140);
         pnlIsi.add(lblDellUser);
-
+        
+        //drop box buat pilihan dosen/mhs
         cbbPilihan2 = new JComboBox(arrPilihan);
         cbbPilihan2.setSize(170, 20);
         cbbPilihan2.setLocation(400, 210);
@@ -166,6 +168,7 @@ public class AddDelUser extends JFrame {
 //        cbbNama.setLocation(400, 240);
 //        pnlIsi.add(cbbNama);
         
+        //masih gagal. buat nampilin nama mhs di dropbox
         btnCari = new JButton("Search");
         btnCari.setBounds(580,240,170,20);
         btnCari.addActionListener(new ActionListener(){

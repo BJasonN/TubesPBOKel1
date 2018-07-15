@@ -74,7 +74,7 @@ public class LihatNilai extends JFrame{
         btnSubmit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String[][] ArrData ={{},{}};
+                String[] ArrData ={};
                 List<String> ListData = new ArrayList();
                 //ambil tahun dan semester dari combo box
                 String tahun = (String) cbbThnSem.getSelectedItem();
@@ -83,7 +83,7 @@ public class LihatNilai extends JFrame{
                 String idAktif = Login.sid;
                 //isi tabel didapatkan dari akses database
                 ListData = DataAkses.getNilaiMhs(idAktif, smt, tahun);
-                ArrData = ListData.toArray((new String[ListData.size()]);//gimana caranya ga error
+                ArrData = ListData.toArray(new String[ListData.size()]);//gimana caranya ga error==>lu masukin array 1D ke 2D
                 //bangun array berisi header dan isi tabel
                 Object[] header = {"Matkul", "1", "2", "3", "4", "5", "UTS", "UAS", "AA", "Index"};
                 Object[][] isiPerRow = (Object[][])(Object)ArrData;
