@@ -19,7 +19,8 @@ import java.util.List;
 
 public class DataAkses {
 
-    public static List<String> getNama(String pilih) {
+    public static String[] getNama(String pilih) {
+        String[] arrNama = {};
         List<String> lNama = new ArrayList<>();
         if (pilih.equals("Mahasiswa")) {
             try {
@@ -31,11 +32,15 @@ public class DataAkses {
                 while (rs.next()) {
                     lNama.add(rs.getString(1));
                 }
+                arrNama = new String[lNama.size()];
+                for(int i = 0; i < lNama.size(); i++){
+                    arrNama[i] = lNama.get(i);
+                }
             }catch(SQLException ex){
                 ex.printStackTrace();
             }
         }
-        return lNama;
+        return arrNama;
     }
     
     public static List<String> getNilaiMhs(String nim, String smt, String tahun){

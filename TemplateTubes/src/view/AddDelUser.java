@@ -144,7 +144,7 @@ public class AddDelUser extends JFrame {
         rbtnMale.setLocation(600, 65);
         rbtnMale.setSize(170, 20);
         pnlIsi.add(rbtnMale);
-        
+
         //radio button buat gender
         gender = new ButtonGroup();
         gender.add(rbtnMale);
@@ -155,33 +155,31 @@ public class AddDelUser extends JFrame {
         lblDellUser.setSize(200, 100);
         lblDellUser.setLocation(445, 140);
         pnlIsi.add(lblDellUser);
-        
+
         //drop box buat pilihan dosen/mhs
         cbbPilihan2 = new JComboBox(arrPilihan);
         cbbPilihan2.setSize(170, 20);
         cbbPilihan2.setLocation(400, 210);
         pnlIsi.add(cbbPilihan2);
-        
+
 //        String[] arrNama = {""};
 //        cbbNama = new JComboBox();
 //        cbbNama.setSize(170, 20);
 //        cbbNama.setLocation(400, 240);
 //        pnlIsi.add(cbbNama);
-        
         //masih gagal. buat nampilin nama mhs di dropbox
         btnCari = new JButton("Search");
-        btnCari.setBounds(580,240,170,20);
-        btnCari.addActionListener(new ActionListener(){
+        btnCari.setBounds(580, 240, 170, 20);
+        btnCari.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-                    List<String> lNama = DataAkses.getNama("Mahasiswa");
-                    String[] arrNama = lNama.toArray(new String[lNama.size()]);
-                    cbbNama = new JComboBox();
-                    cbbNama.setSize(170, 20);
-                    cbbNama.setLocation(400, 240);
-                    pnlIsi.add(cbbNama);
-                
+
+                String[] arrNama = DataAkses.getNama("Mahasiswa");
+                cbbNama = new JComboBox(arrNama);
+                cbbNama.setSize(170, 20);
+                cbbNama.setLocation(400, 240);
+                pnlIsi.add(cbbNama);
+                pnlIsi.repaint();
             }
         });
         pnlIsi.add(btnCari);
