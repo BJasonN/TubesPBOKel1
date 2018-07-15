@@ -30,7 +30,7 @@ public class DataAkses {
                 ResultSet rs = st.executeQuery(sql);
 
                 while (rs.next()) {
-                    lNama.add(rs.getString(1));
+                    lNama.add(rs.getString(2));
                 }
                 arrNama = new String[lNama.size()];
                 for(int i = 0; i < lNama.size(); i++){
