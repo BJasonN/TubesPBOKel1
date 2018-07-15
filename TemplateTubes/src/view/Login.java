@@ -39,6 +39,7 @@ import sistem.MainSistem;
  * @author Sutanto
  */
 public class Login extends JFrame{
+    public static String sid = "";
     public Login(){
         initComponents();
     }
@@ -97,7 +98,7 @@ public class Login extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 Object setLogIn = login.getSelectedItem();
-                String sid = id.getText();
+                sid = id.getText();//dibuat public diatas agar gampang cari data lihat nilai
                 String spassword = password.getText();
                 //untuk masuk ke mahasiswa
                 if(setLogIn.equals("Mahasiswa")){

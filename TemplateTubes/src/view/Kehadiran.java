@@ -1,12 +1,14 @@
 package view;
 
-
+import dao.DataAkses;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -67,18 +69,27 @@ public class Kehadiran extends JFrame{
         cbbThnSem.setBounds(150, 125, 100, 25);
         pnlIsi.add(cbbThnSem);
         
-        Object[] header = {"Matkul", "Dosen", "Kehadiran", "Presentase"};
-        Object[][] isiPerRow = {
-                               {"PBO", "Ria Chaniago", "11/11", "100%"},
-                               {"PBO", "Ria Chaniago", "11/11", "100%"},
-                               {"PBO", "Ria Chaniago", "11/11", "100%"}
-                               };
-        
         btnSubmit = new JButton("Submit");
         btnSubmit.setBounds(150, 175, 100, 50);
         btnSubmit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String[][] ArrData ={{},{}};
+                List<String> ListData = new ArrayList();
+                //ambil tahun dan semester dari combo box
+                String tahun = (String) cbbThnSem.getSelectedItem();
+                String smt = (String) cbbSem.getSelectedItem();
+                //ambil id mahasiswa yang sedang login
+                String idAktif = Login.sid;
+                //isi tabel didapatkan dari akses database
+                ListData = DataAkses.getKehadiran(idAktif, smt, tahun);
+                ArrData = ListData.toArray((new String[ListData.size()]);//gimana caranya ubah
+                //bangun array berisi header dan isi tabel
+                Object[] header = {"Matkul", "Dosen", "Kehadiran"};
+                Object[][] isiPerRow = (Object[][])(Object)ArrData;
+                //add nilai ke tabel
+                tblKehadiran = new JTable(isiPerRow, header);
+                scroll = new JScrollPane(tblKehadiran);
                 tblKehadiran = new JTable(isiPerRow, header);
                 scroll = new JScrollPane(tblKehadiran);
                 scroll.setBounds(400, 40, 400, 100);
