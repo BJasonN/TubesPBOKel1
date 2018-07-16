@@ -49,7 +49,7 @@ public class TambahMatkul extends JFrame{
         //--------------------------------
         
         lbltambahmatkul = new JLabel("Tambah Matkul");
-        lbltambahmatkul.setBounds(WIDTH, WIDTH, WIDTH, HEIGHT);
+        lbltambahmatkul.setBounds(450, -60, 100,200);
         pnlIsi.add(lbltambahmatkul);
         
         lblKodeMatkul = new JLabel("Kode Matkul : ");
