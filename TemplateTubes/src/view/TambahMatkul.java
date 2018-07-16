@@ -10,6 +10,7 @@ package view;
  *
  * @author kevin
  */
+import dao.DataAkses;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,21 +53,21 @@ public class TambahMatkul extends JFrame{
         lbltambahmatkul.setBounds(WIDTH, WIDTH, WIDTH, HEIGHT);
         pnlIsi.add(lbltambahmatkul);
         
-        lblKodeMatkul = new JLabel("Kode Matkul : ");
-        lblKodeMatkul.setBounds(350, -20, 100,200);
-        pnlIsi.add(lblKodeMatkul);
-        
-        txtKodeMatkul = new JTextField();
-        txtKodeMatkul.setBounds(450,70,170,20);
-        pnlIsi.add(txtKodeMatkul);
-        
         lblMatkul = new JLabel("Matkul : ");
-        lblMatkul.setBounds(350,10,100,200);
+        lblMatkul.setBounds(350,-20,100,200);
         pnlIsi.add(lblMatkul);
         
         txtMatkul = new JTextField();
-        txtMatkul.setBounds(450,100,170,20);
+        txtMatkul.setBounds(450,70,170,20);
         pnlIsi.add(txtMatkul);
+        
+        lblKodeMatkul = new JLabel("Kode Matkul : ");
+        lblKodeMatkul.setBounds(350, 10, 100,200);
+        pnlIsi.add(lblKodeMatkul);
+        
+        txtKodeMatkul = new JTextField();
+        txtKodeMatkul.setBounds(450,100,170,20);
+        pnlIsi.add(txtKodeMatkul);
         
         lbljumlah = new JLabel("Jumlah SKS: ");
         lbljumlah.setBounds(350, 40, 100,200);
@@ -81,6 +82,10 @@ public class TambahMatkul extends JFrame{
         btnSubmit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String nama = txtMatkul.getText();
+                String kode=txtMatkul.getText();
+                int sks = Integer.parseInt(jumlah.getText());
+                DataAkses.addMatkul(nama, kode, sks);
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diinput!");
             }
         });
