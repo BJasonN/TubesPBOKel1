@@ -139,4 +139,19 @@ public class DataAkses {
             ex.printStackTrace();
         }
     }
+    
+    public static void addSaran(String nama,String nim, String saran){
+        String sql = "insert into saran values(?,?,?)";
+        
+        try {
+            Connection con = ConnectionManager.getConnection();
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setString(1, nim);
+            st.setString(2, nama);
+            st.setString(3, saran);
+            st.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

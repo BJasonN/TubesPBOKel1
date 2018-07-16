@@ -7,6 +7,7 @@ package view;
  */
 
 
+import dao.DataAkses;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -26,6 +27,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+import sistem.MainSistem;
 
 /**
  *
@@ -63,8 +65,9 @@ public class MhsSaran extends JFrame{
         pnl1.add(lblnim);
         lblnim.setBounds(350,300, 100, 30);
         lblnim.setFont(new Font("Arial",Font.PLAIN,15));
-        nim= new JTextField();
+        nim= new JTextArea();
         nim.setBounds(450,300 , 100, 20);
+        nim.setText(MainSistem.nim);
         pnl1.add(nim);
         
         
@@ -72,8 +75,9 @@ public class MhsSaran extends JFrame{
         pnl1.add(lblmahasiswa);
         lblmahasiswa.setBounds(350,350, 100, 30);
         lblmahasiswa.setFont(new Font("Arial",Font.PLAIN,15));
-        mhs= new JTextField();
+        mhs= new JTextArea();
         mhs.setBounds(450,350, 100, 20);
+        mhs.setText(MainSistem.nama);
         pnl1.add(mhs);
         
         lblsaranmhs = new JLabel("Saran : ");
@@ -89,9 +93,11 @@ public class MhsSaran extends JFrame{
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String nama = mhs.getText();
+                String inim = nim.getText();
+                String saran = saranmhs.getText();
+                DataAkses.addSaran(nama, inim, saran);
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diinput!");
-                dispose();
-                new JFrameMahasiswa().setVisible(true);
             }
         });
         pnl1.add(submit);
@@ -116,7 +122,7 @@ public class MhsSaran extends JFrame{
     JLabel lblnim;
     JLabel lblsaranmhs;
     JButton submit;
-    JTextField nim;
-    JTextField mhs;
+    JTextArea nim;
+    JTextArea mhs;
     JTextArea saranmhs;
 }

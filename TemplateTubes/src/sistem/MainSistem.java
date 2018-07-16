@@ -15,6 +15,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 public class MainSistem {
     public static String nama;
+    public static String nim;
+    
     public static void main(String[] args) {
         DosenMatkul dosenMatkul = new DosenMatkul();
         KotakSaran kotakSaran = new KotakSaran();

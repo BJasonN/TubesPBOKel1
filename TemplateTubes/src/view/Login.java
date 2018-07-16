@@ -130,7 +130,7 @@ public class Login extends JFrame {
                     } else {
                        if (cek2) {
                             MainSistem.nama = cth.getNama();
-                            System.out.println(MainSistem.nama);
+                            MainSistem.nim= cth.getId();
                             dispose();
                             new JFrameMahasiswa().setVisible(true);
                         } else {
