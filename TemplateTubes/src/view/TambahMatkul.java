@@ -48,14 +48,9 @@ public class TambahMatkul extends JFrame{
         add(pnlIsi);
         //--------------------------------
         
-        lblDosen = new JLabel("Dosen : ");
-        lblDosen.setBounds(350, -50, 100,200);
-        pnlIsi.add(lblDosen);
-        
-        Object[] arrDosen = {"Dosen1","dosen2","dosen3"};
-        cbbDosen = new JComboBox(arrDosen);
-        cbbDosen.setBounds(450, 40, 170,20);
-        pnlIsi.add(cbbDosen);
+        lbltambahmatkul = new JLabel("Tambah Matkul");
+        lbltambahmatkul.setBounds(WIDTH, WIDTH, WIDTH, HEIGHT);
+        pnlIsi.add(lbltambahmatkul);
         
         lblKodeMatkul = new JLabel("Kode Matkul : ");
         lblKodeMatkul.setBounds(350, -20, 100,200);
@@ -73,8 +68,16 @@ public class TambahMatkul extends JFrame{
         txtMatkul.setBounds(450,100,170,20);
         pnlIsi.add(txtMatkul);
         
+        lbljumlah = new JLabel("Jumlah SKS: ");
+        lbljumlah.setBounds(350, 40, 100,200);
+        pnlIsi.add(lbljumlah);
+        
+        jumlah = new JTextField();
+        jumlah.setBounds(450, 130, 50,20);
+        pnlIsi.add(jumlah);
+        
         btnSubmit = new JButton("Submit");
-        btnSubmit.setBounds(450,130,170,20);
+        btnSubmit.setBounds(450,180,170,20);
         btnSubmit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -105,15 +108,18 @@ public class TambahMatkul extends JFrame{
         }
         return dimg;
     }
-    
+    public static void main(String[] args) {
+        TambahMatkul matkul = new TambahMatkul();
+        matkul.setVisible(true);
+    }
     private JPanel pnlUtama;
     private JLabel lblJudul;
     private JPanel pnlIsi;
-    
-    private JLabel lblDosen;
+    private JLabel lbltambahmatkul;
+    private JLabel lbljumlah;
     private JLabel lblMatkul;
     private JLabel lblKodeMatkul;
-    private JComboBox cbbDosen;
+    private JTextField jumlah;
     private JTextField txtMatkul;
     private JTextField txtKodeMatkul;
     private JButton btnSubmit;
