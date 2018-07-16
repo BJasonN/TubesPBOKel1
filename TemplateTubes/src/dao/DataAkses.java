@@ -140,7 +140,7 @@ public class DataAkses {
         }
     }
     
-<<<<<<< HEAD
+
     public static void addSaran(String nama,String nim, String saran){
         String sql = "insert into saran values(?,?,?)";
         
@@ -155,7 +155,7 @@ public class DataAkses {
             ex.printStackTrace();
         }
     }
-=======
+
     //masukin data ke roster
     public static void addRoster(String dosen,String matkul, String tgl, String ruangan, String jam, String hari){
         try{
@@ -171,5 +171,4 @@ public class DataAkses {
     }
     //hapus data dari roster
     
->>>>>>> 94c4e9733bf30ec72f13970bd964550e26ff8535
 }

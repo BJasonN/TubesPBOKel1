@@ -89,7 +89,7 @@ public class MhsSaran extends JFrame{
         pnl1.add(saranmhs);
         
         submit= new JButton("submit");
-        submit.setBounds(450,500, 100, 20);
+        submit.setBounds(350,500, 100, 20);
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -102,6 +102,17 @@ public class MhsSaran extends JFrame{
         });
         pnl1.add(submit);
         
+        back= new JButton("back");
+        back.setBounds(550,500, 100, 20);
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new JFrameMahasiswa().setVisible(true);
+            }
+        });
+        pnl1.add(back);
+        
     }
     private Image resizeImage(String url){
         Image dimg = null;
@@ -113,7 +124,7 @@ public class MhsSaran extends JFrame{
         }
         return dimg;
     }
-    
+
     JPanel pnlUtama;
     JPanel pnl1;
     JLabel lblJudul;
@@ -122,6 +133,7 @@ public class MhsSaran extends JFrame{
     JLabel lblnim;
     JLabel lblsaranmhs;
     JButton submit;
+    JButton back;
     JTextArea nim;
     JTextArea mhs;
     JTextArea saranmhs;
