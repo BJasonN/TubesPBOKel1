@@ -113,10 +113,7 @@ public class TambahMatkul extends JFrame{
         }
         return dimg;
     }
-    public static void main(String[] args) {
-        TambahMatkul matkul = new TambahMatkul();
-        matkul.setVisible(true);
-    }
+    
     private JPanel pnlUtama;
     private JLabel lblJudul;
     private JPanel pnlIsi;
