@@ -19,6 +19,9 @@ public class Mahasiswa extends Orang{
         super.setPassword(password);
     }
     
+    public Mahasiswa(){
+        
+    }
     public int getTahunMasuk() {
         return tahunMasuk;
     }

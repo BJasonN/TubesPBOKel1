@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import sistem.Mahasiswa;
 
 public class DataAkses {
 
@@ -43,6 +44,30 @@ public class DataAkses {
         return arrNama;
     }
     
+    //untuk cek login
+    public static ArrayList<Mahasiswa> getUsername(String pilih) {
+        
+        ArrayList<Mahasiswa> lNama = new ArrayList<>();
+        if (pilih.equals("Mahasiswa")) {
+            try {
+                Connection con = ConnectionManager.getConnection();
+                String sql = "select * from mahasiswalogin";
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+
+                while (rs.next()) {
+                    Mahasiswa mhs = new Mahasiswa();
+                    mhs.setId(rs.getString("nim"));
+                    mhs.setPassword(rs.getString("password"));
+                    mhs.setNama(rs.getString("nama"));
+                    lNama.add(mhs);
+                }
+            }catch(SQLException ex){
+                ex.printStackTrace();
+            }
+        }
+        return lNama;
+    }
     public static List<String> getNilaiMhs(String nim, String smt, String tahun){
         List<String> ListData = new ArrayList();
         int i = 0;
