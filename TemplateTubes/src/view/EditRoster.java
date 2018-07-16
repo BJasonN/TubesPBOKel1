@@ -68,10 +68,12 @@ public class EditRoster extends JFrame{
         txtMatKul.setSize(170, 20);
         pnlIsi.add(txtMatKul);
         
-        Object[] arrPilihan = {"R1", "R2", "R3"};
+        
+        
+        Object[] arrPilihan = {"R1", "R2", "R3","R4","R5"};
         cbbRuangan = new JComboBox(arrPilihan);
         cbbRuangan.setSize(170, 20);
-        cbbRuangan.setLocation(100,100);
+        cbbRuangan.setLocation(100,130);
         pnlIsi.add(cbbRuangan);
         
         btnSubmit = new JButton("Submit");
@@ -155,6 +157,10 @@ public class EditRoster extends JFrame{
         return dimg;
     }
     
+    public static void main(String[] args) {
+        new EditRoster().setVisible(true);
+    }
+    
     private JPanel pnlUtama;
     private JLabel lblJudul;
     
@@ -165,6 +171,9 @@ public class EditRoster extends JFrame{
     private JTextField txtMatKul;
     private JButton btnSubmit;
     private JLabel lblJam;
+    private JLabel lblTgl;
+    private JLabel lblBulan;
+    private JComboBox cbbTgl;
     
     private JComboBox cbbRuangan;
     private JTable tableRoster;
