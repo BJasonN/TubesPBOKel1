@@ -139,4 +139,20 @@ public class DataAkses {
             ex.printStackTrace();
         }
     }
+    
+    //masukin data ke roster
+    public static void addRoster(String dosen,String matkul, String tgl, String ruangan, String jam, String hari){
+        try{
+            String sql = "insert into roster(dosen,matkul,tgl,ruangan,jam,hari)"+
+                    "values('"+dosen+"','"+matkul+"','"+tgl+"','"+ruangan+"','"+jam+"','"+hari+"')";
+            
+            Connection con = ConnectionManager.getConnection();
+            Statement st = con.createStatement();
+            st.executeUpdate(sql);
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+    }
+    //hapus data dari roster
+    
 }

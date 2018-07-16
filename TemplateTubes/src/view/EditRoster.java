@@ -10,6 +10,7 @@ package view;
  *
  * @author Kevin
  */
+import dao.DataAkses;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -67,15 +68,24 @@ public class EditRoster extends JFrame{
         txtMatKul.setLocation(100, 70);
         txtMatKul.setSize(170, 20);
         pnlIsi.add(txtMatKul);
-        
-        
-        
+        //tgl dari 1 sampai 31
+        lblTgl = new JLabel("Tgl : ");
+        lblTgl.setBounds(50,60,100,100);
+        pnlIsi.add(lblTgl);
+        Object[] arrTgl = new Object[31];
+        for(int i = 0; i < 30; i++){
+            arrTgl[i] = i+1;
+        }
+        cbbTgl = new JComboBox(arrTgl);
+        cbbTgl.setBounds(100,100,170,20);
+        pnlIsi.add(cbbTgl);
+        //ruangan
         Object[] arrPilihan = {"R1", "R2", "R3","R4","R5"};
         cbbRuangan = new JComboBox(arrPilihan);
-        cbbRuangan.setSize(170, 20);
+        cbbRuangan.setSize(50, 20);
         cbbRuangan.setLocation(100,130);
         pnlIsi.add(cbbRuangan);
-        
+        //masukin roster baru
         btnSubmit = new JButton("Submit");
         btnSubmit.setSize(170, 20);
         btnSubmit.setLocation(100, 190);
@@ -83,10 +93,18 @@ public class EditRoster extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diinput!");
+                String dosen = txtNama.getText();
+                String matkul = txtMatKul.getText();
+                String tgl = String.valueOf(cbbTgl.getSelectedItem());
+                String ruangan = String.valueOf(cbbRuangan.getSelectedItem());
+                String jam = String.valueOf(cbbWaktu.getSelectedItem());
+                String hari = String.valueOf(cbbHari.getSelectedItem());
+                
+                DataAkses.addRoster(dosen, matkul, tgl, ruangan, jam, hari);
             }
         });
         pnlIsi.add(btnSubmit);
-        
+        //table roster
         Object[] judul = {"Jam","Senin","Selasa","Rabu","Kamis","Juamat","Sabtu"};
         Object[][] row = {
             {"07.00 - 08.00","PBO - Ria - R1","qwe","fsd","aa","bb","cc"},
@@ -98,7 +116,7 @@ public class EditRoster extends JFrame{
         scrol = new JScrollPane(tableRoster);
         scrol.setBounds(350, 35, 600, 200);
         pnlIsi.add(scrol);
-        
+        //button back
         logOut = new JButton("Back");
         logOut.setBounds(800, 280, 170, 20);
         logOut.addActionListener(new ActionListener() {
@@ -110,20 +128,23 @@ public class EditRoster extends JFrame{
         });
         pnlIsi.add(logOut);
         
+        //drop box jam
         Object[] arrWaktu = {"07.00 - 08.00","08.00 - 09.00","09.00 - 10.00",
                             "10.00 - 11.00","11.00 - 12.00","12.00 - 13.00",
                             "13.00 - 14.00","14.00 - 15.00","15.00 - 16.00",
                             "16.00 - 17.00","17.00 - 18.00"
                             };
         cbbWaktu = new JComboBox(arrWaktu);
-        cbbWaktu.setBounds(100, 130, 170, 20);
+        cbbWaktu.setBounds(150, 130, 120, 20);
         pnlIsi.add(cbbWaktu);
         
         Object[] arrHari = {"Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"};
         cbbHari = new JComboBox(arrHari);
         cbbHari.setBounds(100, 160, 170, 20);
         pnlIsi.add(cbbHari);
-        
+        //==============================================
+        //yg atas buat submit
+        //yg bawah buat delete
         lblDelete = new JLabel("Delete : ");
         lblDelete.setBounds(100, 170, 100,200);
         pnlIsi.add(lblDelete);
@@ -142,6 +163,7 @@ public class EditRoster extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Data Berhasil DIhapus!");
+                
             }
         });
         pnlIsi.add(btnDel);
