@@ -84,9 +84,9 @@ public class DataAkses {
         return ListData;
     }
     
-    public static void delUser(String pilihan, String nama){
+    public static void delUser(String nama, String pilihan){
         
-        System.out.println(pilihan + nama);
+        
         if(pilihan.equals("Mahasiswa")){
             System.out.println("sda");
             try{
