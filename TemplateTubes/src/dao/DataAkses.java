@@ -156,7 +156,7 @@ public class DataAkses {
     public static void addUser(String nama, String id, String pass, String gender, String pilihan) {
         try {
             Connection con = ConnectionManager.getConnection();
-            Statement st = con.createStatement();
+            Statement st = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
             String sql="";
             if (pilihan.equals("Mahasiswa")) {
                 sql = "insert into mahasiswalogin(nama,nim,password,gender)"
@@ -164,6 +164,11 @@ public class DataAkses {
             } else {
                 sql = "insert into dosenlogin(id,nama,password,gender)"
                         + "values('" + id + "','" + nama + "','" + pass + "','" + gender + "');";
+                String sql2 = "create table "+nama+"(matkul varchar(20),kode varchar(20),sks int(1),persentasekuis float(3),persentaseuts float(3),persentaseuas float(3))";
+                con.setAutoCommit(false);
+                st.addBatch(sql);
+                st.addBatch(sql2);
+                st.executeBatch();
             }
             st.executeUpdate(sql);
         } catch (SQLException ex) {
@@ -186,9 +191,12 @@ public class DataAkses {
         }else{
             try {
                 Connection con = ConnectionManager.getConnection();
-                Statement st = con.createStatement();
+                Statement st = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
                 String sql = "delete from dosenlogin where nama='" + nama + "'";
-                st.executeUpdate(sql);
+                String sql2 = "drop table "+nama;
+                st.addBatch(sql);
+                st.addBatch(sql2);
+                st.executeBatch();
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
