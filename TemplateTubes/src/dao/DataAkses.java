@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import sistem.Mahasiswa;
+import sistem.Orang;
 
 public class DataAkses {
 
@@ -45,11 +46,12 @@ public class DataAkses {
         return arrNama;
     }
 
-    //untuk cek login
-    public static ArrayList<Mahasiswa> getUsername(String pilih) {
-
+    //untuk cek login mhs
+    public static ArrayList<Mahasiswa> getUsernameMhs(String pilih) {
+        
         ArrayList<Mahasiswa> lNama = new ArrayList<>();
         if (pilih.equals("Mahasiswa")) {
+            
             try {
                 Connection con = ConnectionManager.getConnection();
                 String sql = "select * from mahasiswalogin";
@@ -69,7 +71,28 @@ public class DataAkses {
         }
         return lNama;
     }
+    
+    public static ArrayList<Orang> getUsernameDosen(String pilih) {
+        ArrayList<Orang> lNamaD = new ArrayList<>();
+            try {
+                Connection con = ConnectionManager.getConnection();
+                String sql = "select * from dosenlogin";
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery(sql);
 
+                while (rs.next()) {
+                    Orang dosen = new Orang();
+                    dosen.setId(rs.getString("id"));
+                    dosen.setPassword(rs.getString("password"));
+                    dosen.setNama(rs.getString("nama"));
+                    lNamaD.add(dosen);
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            return lNamaD;
+    }
+    
     public static List<String> getNilaiMhs(String nim, String smt, String tahun) {
         List<String> ListData = new ArrayList();
         int i = 0;
