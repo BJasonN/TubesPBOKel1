@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package dao;
-
+import sistem.Roster;
 /**
  *
  * @author USER
@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import sistem.Mahasiswa;
 
@@ -171,4 +172,33 @@ public class DataAkses {
     }
     //hapus data dari roster
     
+    //tampilin data roster
+    //input string tanggal awal sampai akhir selama seminggu
+    //mereturn linkedlist berisi data di database
+    public static LinkedList<Roster> viewRoster(String tgl){
+        LinkedList<Roster> llRoster = new LinkedList<>();
+        String[] arrTgl = tgl.split(" ");
+        String tgl1 = arrTgl[1];
+        String tgl2 = arrTgl[3];
+        try{
+            Connection con = ConnectionManager.getConnection();
+            String sql = "select * from roster where tgl >="+tgl1+" and tgl <="+tgl2;
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while (rs.next()){
+                Roster roster = new Roster();
+                roster.setDosen(rs.getString(1));
+                roster.setMatkul(rs.getString(2));
+                roster.setRuangan(rs.getString(4));
+                roster.setTgl(rs.getString(3));
+                roster.setJam(rs.getString(5));
+                roster.setHari(rs.getString(6));
+                llRoster.add(roster);
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return llRoster;
+    }
 }

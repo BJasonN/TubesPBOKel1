@@ -12,14 +12,14 @@ package sistem;
 import java.util.HashMap;
 import java.util.LinkedList;
 public class DosenMatkul {
-    private Dosen dosen;
+    private String dosen;
     private HashMap<LinkedList<Matkul>,LinkedList<NilaiSatuSemesterPerMahasiswa>> hmMatkulNilai;
 
-    public Dosen getDosen() {
+    public String getDosen() {
         return dosen;
     }
 
-    public void setDosen(Dosen dosen) {
+    public void setDosen(String dosen) {
         this.dosen = dosen;
     }
 

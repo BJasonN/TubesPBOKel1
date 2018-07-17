@@ -1,5 +1,5 @@
 package view;
-
+import sistem.Roster;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -20,6 +20,8 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.sql.Connection;
+import java.util.LinkedList;
 
 public class EditRoster extends JFrame{
 
@@ -104,18 +106,7 @@ public class EditRoster extends JFrame{
             }
         });
         pnlIsi.add(btnSubmit);
-        //table roster
-        Object[] judul = {"Jam","Senin","Selasa","Rabu","Kamis","Juamat","Sabtu"};
-        Object[][] row = {
-            {"07.00 - 08.00","PBO - Ria - R1","qwe","fsd","aa","bb","cc"},
-            {"08.00 - 09.00","PBO","qwe","fsd","aa","bb","cc"},
-            {"09.00 - 10.00","PBO","qwe","fsd","aa","bb","cc"}
-        };
         
-        tableRoster = new JTable(row, judul);
-        scrol = new JScrollPane(tableRoster);
-        scrol.setBounds(350, 35, 600, 200);
-        pnlIsi.add(scrol);
         //button back
         logOut = new JButton("Back");
         logOut.setBounds(800, 280, 170, 20);
@@ -129,7 +120,7 @@ public class EditRoster extends JFrame{
         pnlIsi.add(logOut);
         
         //drop box jam
-        Object[] arrWaktu = {"07.00 - 08.00","08.00 - 09.00","09.00 - 10.00",
+        Object[] arrWaktu = {"7.00 - 8.00","8.00 - 9.00","9.00 - 10.00",
                             "10.00 - 11.00","11.00 - 12.00","12.00 - 13.00",
                             "13.00 - 14.00","14.00 - 15.00","15.00 - 16.00",
                             "16.00 - 17.00","17.00 - 18.00"
@@ -157,8 +148,12 @@ public class EditRoster extends JFrame{
         cbbDelWaktu.setBounds(280, 260, 100, 20);
         pnlIsi.add(cbbDelWaktu);
         
+        cbbDelTgl = new JComboBox(arrTgl);
+        cbbDelTgl.setBounds(390,260,100,20);
+        pnlIsi.add(cbbDelTgl);
+        
         btnDel = new JButton("Delete");
-        btnDel.setBounds(390, 260, 100, 20);
+        btnDel.setBounds(500, 260, 100, 20);
         btnDel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -167,7 +162,49 @@ public class EditRoster extends JFrame{
             }
         });
         pnlIsi.add(btnDel);
+        //==========================================================
+        //untuk menunjukkan jadwal apa saja yang ada di sana
+        btnCari = new JButton("Cari");
+        btnCari.setBounds(600,10,100,20);
+        btnCari.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                //table roster
+                String minggu = String.valueOf(cbbMinggu.getSelectedItem());
+                //hasi dari database ditampung llRoster
+                LinkedList<Roster> llRoster = DataAkses.viewRoster(minggu);
+                //
+                Object[] judul = {"Jam","Senin","Selasa","Rabu","Kamis","Juamat","Sabtu"};
+                Object[][] row = new Object[11][7];
+                for(int i = 0; i < 11; i++){
+                    //mengatur jam pada row 1
+                    row[i][0] = String.valueOf(7+i)+".00 - "+String.valueOf(8+i)+".00";
+                    for(int j = 1; j < 7; j++){
+                        for(int k = 0; k < llRoster.size(); k++){
+                            //mengabil dari linked list
+                            if( llRoster.get(k).getJam().equals(row[i][0]) && hariKeAngka(llRoster.get(k).getHari()).equals("" + j)){
+                                row[i][j] = llRoster.get(k).getDosen()+" - "+llRoster.get(k).getMatkul()+" - "+llRoster.get(k).getRuangan();
+                            }else{
+                                row[i][j] = " ";
+                            }
+                        }
+                    }
+                }
+
+                tableRoster = new JTable(row, judul);
+                scrol = new JScrollPane(tableRoster);
+                scrol.setBounds(350, 35, 600, 200);
+                pnlIsi.add(scrol);
+            }
+        });
+        pnlIsi.add(btnCari);
+        
+        Object[] arrMinggu = {"tgl: 1 - 5","tgl: 8 - 12","tgl: 15 - 19","tgl: 22 - 26"};
+        cbbMinggu = new JComboBox(arrMinggu);
+        cbbMinggu.setBounds(500,10,100,20);
+        pnlIsi.add(cbbMinggu);
     }
+    
     private Image resizeImage(String url){
         Image dimg = null;
         try {
@@ -181,6 +218,32 @@ public class EditRoster extends JFrame{
     
     public static void main(String[] args) {
         new EditRoster().setVisible(true);
+    }
+    
+    //menubah hari senin, selasa, rabu... menjadi 1,2,3...
+    private String hariKeAngka(String hari){
+        String a = "";
+        switch(hari){
+            case "Senin":
+                a = "1";
+                break;
+            case "Selasa":
+                a = "2";
+                break;
+            case "Rabu":
+                a = "3";
+                break;
+            case "Kamis":
+                a = "4";
+                break;
+            case "Jumat":
+                a = "5";
+                break;
+            case "Sabtu":
+                a = "6";
+                break;
+        }
+        return a;
     }
     
     private JPanel pnlUtama;
@@ -208,5 +271,9 @@ public class EditRoster extends JFrame{
     private JLabel lblDelete;
     private JComboBox cbbDelWaktu;
     private JComboBox cbbDelHari;
+    private JComboBox cbbDelTgl;
     private JButton btnDel;
+    
+    private JButton btnCari;
+    private JComboBox cbbMinggu;
 }

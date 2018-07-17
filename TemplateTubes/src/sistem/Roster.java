@@ -11,34 +11,28 @@ package sistem;
  */
 import java.util.Calendar;
 public class Roster {
-    private Dosen dosen;
-    private Matkul matkul;
-    private Calendar tglKelas;
-    private String ruangan;
+    private String dosen;
+    private String matkul;
+    private String tgl;
+    private String ruangan,jam,hari;
 
-    public Dosen getDosen() {
+    public String getDosen() {
         return dosen;
     }
 
-    public void setDosen(Dosen dosen) {
+    public void setDosen(String dosen){
         this.dosen = dosen;
     }
 
-    public Matkul getMatkul() {
+    public String getMatkul() {
         return matkul;
     }
 
-    public void setMatkul(Matkul matkul) {
+    public void setMatkul(String matkul) {
         this.matkul = matkul;
     }
 
-    public Calendar getTglKelas() {
-        return tglKelas;
-    }
-
-    public void setTglKelas(Calendar tglKelas) {
-        this.tglKelas = tglKelas;
-    }
+    
 
     public String getRuangan() {
         return ruangan;
@@ -46,6 +40,30 @@ public class Roster {
 
     public void setRuangan(String ruangan) {
         this.ruangan = ruangan;
+    }
+
+    public String getJam() {
+        return jam;
+    }
+
+    public void setJam(String jam) {
+        this.jam = jam;
+    }
+
+    public String getHari() {
+        return hari;
+    }
+
+    public void setHari(String hari) {
+        this.hari = hari;
+    }
+
+    public String getTgl() {
+        return tgl;
+    }
+
+    public void setTgl(String tgl) {
+        this.tgl = tgl;
     }
     
     
