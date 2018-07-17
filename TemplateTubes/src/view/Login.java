@@ -31,10 +31,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import sistem.Mahasiswa;
 import sistem.MainSistem;
+import sistem.Orang;
 
 /**
  *
@@ -93,7 +95,7 @@ public class Login extends JFrame {
         pnl1.add(lblpassword);
         lblpassword.setBounds(370, 400, 100, 30);
         lblpassword.setFont(new Font("Arial", Font.PLAIN, 15));
-        password = new JTextField();
+        password = new JPasswordField();
         password.setBounds(470, 400, 100, 20);
         pnl1.add(password);
 
@@ -105,10 +107,11 @@ public class Login extends JFrame {
                 Object setLogIn = login.getSelectedItem();
                 sid = id.getText();//dibuat public diatas agar gampang cari data lihat nilai
                 String spassword = password.getText();
-                Mahasiswa cth=null;
+                
                 //untuk masuk ke mahasiswa
                 if (setLogIn.equals("Mahasiswa")) {
-                    ArrayList<Mahasiswa> siswa = DataAkses.getUsername("Mahasiswa");
+                    Mahasiswa cth=null;
+                    ArrayList<Mahasiswa> siswa = DataAkses.getUsernameMhs("Mahasiswa");
                     boolean cek = false, cek2 = false;
                     int i = 0;
                     while (!cek && i < siswa.size() && !cek2) {
@@ -138,7 +141,37 @@ public class Login extends JFrame {
                         }
                     }
                 } else if (setLogIn.equals("Dosen")) {
-                    new Dosen().setVisible(true);
+                    Orang dth=null;
+                    ArrayList<Orang> dosen = DataAkses.getUsernameDosen("Mahasiswa");
+                    boolean cek = false, cek2 = false;
+                    int i = 0;
+                    while (!cek && i < dosen.size() && !cek2) {
+                        dth = dosen.get(i);
+                        
+                        //untuk cek id
+                        if (dth.getId().equals(sid)) {
+                            cek = true;
+                        }
+                       
+                        //untuk cek password
+                        if (dth.getPassword().equals(spassword)) {
+                            cek2 = true;
+                        }
+                        i++;
+                    }
+                    if (!cek) {
+                        JOptionPane.showMessageDialog(null, "ID salah");
+                    } else {
+                       if (cek2) {
+                            MainSistem.nama = dth.getNama();
+                            MainSistem.nim= dth.getId();
+                            dispose();
+                            new Dosen().setVisible(true);;
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Password salah");
+                        }
+                    }
+                    
                 } else {
                     if (sid.equals("admin") && spassword.equals("ada")) {
                         dispose();
@@ -182,7 +215,7 @@ public class Login extends JFrame {
     JButton dosen;
     JButton admin;
     JButton submit;
-    JTextField password;
+    JPasswordField password;
     JTextField id;
 
 }
