@@ -171,6 +171,16 @@ public class DataAkses {
         }
     }
     //hapus data dari roster
+    public static void delRoster(String jam, String hari, String tgl){
+        try{
+            Connection con = ConnectionManager.getConnection();
+            Statement st = con.createStatement();
+            String sql = "delete from roster where jam ='"+jam+"' and hari='"+hari+"' and tgl="+tgl;
+            st.executeUpdate(sql);
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+    }
     
     //tampilin data roster
     //input string tanggal awal sampai akhir selama seminggu

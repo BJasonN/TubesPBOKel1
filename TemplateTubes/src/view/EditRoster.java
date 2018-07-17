@@ -158,7 +158,10 @@ public class EditRoster extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Data Berhasil DIhapus!");
-                
+                String jam = String.valueOf(cbbDelWaktu.getSelectedItem());
+                String hari = String.valueOf(cbbDelHari.getSelectedItem());
+                String tgl = String.valueOf(cbbDelTgl.getSelectedItem());
+                DataAkses.delRoster(jam, hari, tgl);
             }
         });
         pnlIsi.add(btnDel);
@@ -183,7 +186,7 @@ public class EditRoster extends JFrame{
                         for(int k = 0; k < llRoster.size(); k++){
                             //mengabil dari linked list
                             if( llRoster.get(k).getJam().equals(row[i][0]) && hariKeAngka(llRoster.get(k).getHari()).equals("" + j)){
-                                row[i][j] = llRoster.get(k).getDosen()+" - "+llRoster.get(k).getMatkul()+" - "+llRoster.get(k).getRuangan();
+                                row[i][j] = llRoster.get(k).getDosen()+" - "+llRoster.get(k).getMatkul()+" - "+llRoster.get(k).getRuangan()+" - tgl: "+llRoster.get(k).getTgl();
                             }else{
                                 row[i][j] = " ";
                             }
