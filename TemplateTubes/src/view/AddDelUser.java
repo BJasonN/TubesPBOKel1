@@ -89,7 +89,7 @@ public class AddDelUser extends JFrame {
         txtId.setSize(170, 20);
         pnlIsi.add(txtId);
 
-        Object[] arrPilihan = {"Mahasiswa", "Dosen", "Admin"};
+        Object[] arrPilihan = {"Mahasiswa", "Dosen"};
         cbbPilihan = new JComboBox(arrPilihan);
         cbbPilihan.setSize(170, 20);
         cbbPilihan.setLocation(400, 100);
@@ -106,32 +106,13 @@ public class AddDelUser extends JFrame {
                 String nama = txtNama.getText();
                 String id = txtId.getText();
                 String password = nama + id;
-                char radioText = 'N';//get text from radio
+                String radioText = "N";//get text from radio
                 if (rbtnFemale.isSelected()) {
-                    radioText = 'F';
+                    radioText = "F";
                 } else {
-                    radioText = 'M';
+                    radioText = "M";
                 }
-                
-
-                Object pilihan = cbbPilihan.getSelectedItem();
-                if (pilihan.equals("Mahasiswa")) {
-                    try {
-                        Statement st = con.createStatement();
-                        String sql = "insert into mahasiswalogin(nama,nim,password,gender)"
-                                + "values('" + nama + "','" + id + "','" + password + "','" + radioText + "');";
-                        st.execute(sql);
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
-                } else {
-
-                }
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
+                DataAkses.addUser(nama, id, password, radioText, String.valueOf(cbbPilihan.getSelectedItem()));
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diinput!");
             }
         });
@@ -175,7 +156,7 @@ public class AddDelUser extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                String[] arrNama = DataAkses.getNama("Mahasiswa");
+                String[] arrNama = DataAkses.getNama(String.valueOf(cbbPilihan2.getSelectedItem()));
                 cbbNama = new JComboBox(arrNama);
                 cbbNama.setSize(170, 20);
                 cbbNama.setLocation(400, 240);

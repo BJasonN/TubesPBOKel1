@@ -150,6 +150,9 @@ public class SetPersentase extends JFrame{
         }
         return dimg;
     }
+    public static void main(String[] args) {
+        new SetPersentase().setVisible(true);
+    }
     
     JPanel pnl1;
     JPanel pnlUtama;

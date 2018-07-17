@@ -219,9 +219,7 @@ public class EditRoster extends JFrame{
         return dimg;
     }
     
-    public static void main(String[] args) {
-        new EditRoster().setVisible(true);
-    }
+    
     
     //menubah hari senin, selasa, rabu... menjadi 1,2,3...
     private String hariKeAngka(String hari){
