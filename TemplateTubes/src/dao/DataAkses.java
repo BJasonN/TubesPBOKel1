@@ -250,7 +250,7 @@ public class DataAkses {
         
 
         if (cek == true) {
-            String sql = "insert into" + ntable + "(matkul,sks) values(?,?)";
+            String sql = "insert into " + ntable + "(matkul,sks) values(?,?)";
 
             try {
                 Connection con = ConnectionManager.getConnection();
@@ -264,7 +264,7 @@ public class DataAkses {
         } else {
             String sql = "insert into " + ntable + "(matkul,sks) values("+matkul+","+sks+")";
             String sql2 = "create table " + ntable + "(matkul varchar(20),"
-                    + "sks int(2),ptugas float(10),pkuis float(10),puts float(10),puas float(10);";
+                    + "sks int(2),ptugas float(10),pkuis float(10),puts float(10),puas float(10))";
             try {
                 Connection con = ConnectionManager.getConnection();
                 Statement stmt = con.createStatement(
