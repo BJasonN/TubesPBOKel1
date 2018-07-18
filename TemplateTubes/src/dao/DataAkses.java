@@ -115,6 +115,7 @@ public class DataAkses {
         }
         return lNamaD;
     }
+
     public static String[] getNamaDosen() {
         ArrayList<Orang> lNamaD = getUsernameDosen("Dosen");
 
@@ -245,36 +246,29 @@ public class DataAkses {
         }
         return lmatkul;
     }
-    public static void addMatkulDosen(boolean cek, String ntable, String matkul, String sks) {
-        LinkedList<String> lTable = listTable();
-        
 
-        if (cek == true) {
-            String sql = "insert into " + ntable + "(matkul,sks) values(?,?)";
+    public static void addMatkulDosen(String ntable, String matkul, String sks) {
+        String sql = "create table " + ntable + "(matkul varchar(20),sks int(2),ptugas float(10),pkuis float(10),puts float(10),puas float(10));";
+        String sql2 = "insert into " + ntable + "values('"+matkul +"','" + sks + "',0.0,0.0,0.0,0.0)";
+        try {
+            Connection con = ConnectionManager.getConnection();
+            Statement stmt = con.createStatement();
+            stmt.addBatch(sql);
+            stmt.addBatch(sql2);
+            stmt.executeBatch();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 
-            try {
-                Connection con = ConnectionManager.getConnection();
-                PreparedStatement st = con.prepareStatement(sql);
-                st.setString(1, matkul);
-                st.setString(2, sks);
-                st.executeUpdate();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        } else {
-            String sql = "insert into " + ntable + "(matkul,sks) values("+matkul+","+sks+")";
-            String sql2 = "create table " + ntable + "(matkul varchar(20),"
-                    + "sks int(2),ptugas float(10),pkuis float(10),puts float(10),puas float(10))";
-            try {
-                Connection con = ConnectionManager.getConnection();
-                Statement stmt = con.createStatement(
-                        ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-                stmt.addBatch(sql2);
-                stmt.addBatch(sql);
-                stmt.executeBatch();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
+    public static void addMatkulDosen2(String ntable, String matkul, String sks) {
+        String sql = "insert into " + ntable + "(matkul,sks) values('" + matkul + "','" + sks +"')";
+        try {
+            Connection con = ConnectionManager.getConnection();
+            PreparedStatement st = con.prepareStatement(sql);
+            st.executeQuery();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -290,7 +284,6 @@ public class DataAkses {
                 System.out.println(daftarTable.get(i));
                 i++;
             }
-            
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -371,7 +364,7 @@ public class DataAkses {
 
     public static String[][] getSaran() {
         LinkedList<KotakSaran> lsaran = new LinkedList<>();
-        String[][] daftarsaran=null;
+        String[][] daftarsaran = null;
         try {
             Connection con = ConnectionManager.getConnection();
             String sql = "select * from saran";

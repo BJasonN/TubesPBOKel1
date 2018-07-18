@@ -109,7 +109,7 @@ public class InputMatkulDosen extends JFrame {
                 boolean cek = false;
                 int i = 0;
                 while (cek == false && i < lmatkul.size()) {
-                    if (lmatkul.get(i).getNamaMatkul().equals("tmatkul")) {
+                    if (lmatkul.get(i).getNamaMatkul().equals(tmatkul)) {
                         sks = Integer.toString(lmatkul.get(i).getSks());
                         cek = true;
                     }
@@ -126,8 +126,12 @@ public class InputMatkulDosen extends JFrame {
                     }
                     a++;
                 }
-                DataAkses.addMatkulDosen(cek,ntable,tmatkul,sks);
-
+                
+                if(cek){
+                    DataAkses.addMatkulDosen2(ntable,tmatkul,sks);
+                }else{
+                    DataAkses.addMatkulDosen(ntable, tmatkul, sks);
+                }
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diinput!");
             }
         });
