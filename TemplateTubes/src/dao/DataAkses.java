@@ -202,10 +202,11 @@ public class DataAkses {
             }
         } else {
             try {
+                
                 Connection con = ConnectionManager.getConnection();
                 Statement st = con.createStatement();
                 String sql = "delete from dosenlogin where nama='" + nama + "'";
-
+                st.executeUpdate(sql);
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }

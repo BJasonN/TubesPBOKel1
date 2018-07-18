@@ -109,7 +109,7 @@ public class InputMatkulDosen extends JFrame {
                 boolean cek = false;
                 int i = 0;
                 while (cek == false && i < lmatkul.size()) {
-                    if (lmatkul.get(i).getNamaMatkul().equals("tmatkul")) {
+                    if (lmatkul.get(i).getNamaMatkul().equals(tmatkul)) {
                         sks = Integer.toString(lmatkul.get(i).getSks());
                         cek = true;
                     }
@@ -119,14 +119,14 @@ public class InputMatkulDosen extends JFrame {
                 int a = 0;
                 boolean cek2 = false;
                 String ntable = tdosen + tsem;
-                while (a < lTable.size() && !cek) {
+                while (a < lTable.size() && !cek2) {
 
                     if (lTable.get(a).equals(ntable)) {
-                        cek = true;
+                        cek2 = true;
                     }
                     a++;
                 }
-                DataAkses.addMatkulDosen(cek,ntable,tmatkul,sks);
+                DataAkses.addMatkulDosen(cek2,ntable,tmatkul,sks);
 
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diinput!");
             }

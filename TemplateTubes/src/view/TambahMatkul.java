@@ -83,7 +83,7 @@ public class TambahMatkul extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 String nama = txtMatkul.getText();
-                String kode=txtMatkul.getText();
+                String kode=txtKodeMatkul.getText();
                 int sks = Integer.parseInt(jumlah.getText());
                 DataAkses.addMatkul(nama, kode, sks);
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diinput!");
@@ -112,6 +112,9 @@ public class TambahMatkul extends JFrame{
             ex.printStackTrace(System.err);
         }
         return dimg;
+    }
+    public static void main(String[] args) {
+        new TambahMatkul().setVisible(true);
     }
     
     private JPanel pnlUtama;
