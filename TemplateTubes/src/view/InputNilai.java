@@ -147,6 +147,10 @@ public class InputNilai extends JFrame{
         return dimg;
     }
     
+    public static void main(String[] args) {
+        new InputNilai().setVisible(true);
+    }
+    
     private JPanel pnlUtama;
     private JLabel lblJudul;
     

@@ -24,7 +24,7 @@ import sistem.Matkul;
 import sistem.Orang;
 
 public class DataAkses {
-
+    //output untuk menunjukkan nama dosen/mhs yg mau dihapus
     public static String[] getNama(String pilih) {
         String[] arrNama = {};
         List<String> lNama = new ArrayList<>();
@@ -32,6 +32,23 @@ public class DataAkses {
             try {
                 Connection con = ConnectionManager.getConnection();
                 String sql = "select * from mahasiswalogin";
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+
+                while (rs.next()) {
+                    lNama.add(rs.getString(2));
+                }
+                arrNama = new String[lNama.size()];
+                for (int i = 0; i < lNama.size(); i++) {
+                    arrNama[i] = lNama.get(i);
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }else{
+            try {
+                Connection con = ConnectionManager.getConnection();
+                String sql = "select * from dosenlogin";
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(sql);
 
@@ -96,6 +113,7 @@ public class DataAkses {
         return lNamaD;
     }
 
+<<<<<<< HEAD
     public static String[] getNamaDosen() {
         ArrayList<Orang> lNamaD = getUsernameDosen("Dosen");
 
@@ -107,6 +125,8 @@ public class DataAkses {
         return namad;
     }
 
+=======
+>>>>>>> 5d5204c91549a285d2e43c8bcba0ea96b24268db
     public static List<String> getNilaiMhs(String nim, String smt, String tahun) {
         List<String> ListData = new ArrayList();
         int i = 0;
@@ -149,15 +169,44 @@ public class DataAkses {
         return ListData;
     }
 
+    public static void addUser(String nama, String id, String pass, String gender, String pilihan) {
+        try {
+            Connection con = ConnectionManager.getConnection();
+            Statement st = con.createStatement();
+            String sql="";
+            if (pilihan.equals("Mahasiswa")) {
+                sql = "insert into mahasiswalogin(nama,nim,password,gender)"
+                        + "values('" + nama + "','" + id + "','" + pass + "','" + gender + "');";
+            } else {
+                sql = "insert into dosenlogin(id,nama,password,gender)"
+                        + "values('" + id + "','" + nama + "','" + pass + "','" + gender + "');";
+                
+                st.executeUpdate(sql);
+            }
+            st.executeUpdate(sql);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public static void delUser(String nama, String pilihan) {
 
         if (pilihan.equals("Mahasiswa")) {
-            System.out.println("sda");
+            
             try {
                 Connection con = ConnectionManager.getConnection();
                 Statement st = con.createStatement();
                 String sql = "delete from mahasiswalogin where nama='" + nama + "'";
                 st.executeUpdate(sql);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }else{
+            try {
+                Connection con = ConnectionManager.getConnection();
+                Statement st = con.createStatement();
+                String sql = "delete from dosenlogin where nama='" + nama + "'";
+                
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
@@ -178,6 +227,7 @@ public class DataAkses {
         }
     }
 
+<<<<<<< HEAD
     public static ArrayList<Matkul> getNamaMatkul() {
         ArrayList<Matkul> lmatkul = new ArrayList<>();
         try {
@@ -260,6 +310,8 @@ public class DataAkses {
         return daftarTable;
     }
 
+=======
+>>>>>>> 5d5204c91549a285d2e43c8bcba0ea96b24268db
     public static void addSaran(String nama, String nim, String saran) {
         String sql = "insert into saran values(?,?,?)";
 
@@ -288,7 +340,21 @@ public class DataAkses {
             ex.printStackTrace();
         }
     }
+
     //hapus data dari roster
+<<<<<<< HEAD
+=======
+    public static void delRoster(String jam, String hari, String tgl) {
+        try {
+            Connection con = ConnectionManager.getConnection();
+            Statement st = con.createStatement();
+            String sql = "delete from roster where jam ='" + jam + "' and hari='" + hari + "' and tgl=" + tgl;
+            st.executeUpdate(sql);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+>>>>>>> 5d5204c91549a285d2e43c8bcba0ea96b24268db
 
     //tampilin data roster
     //input string tanggal awal sampai akhir selama seminggu

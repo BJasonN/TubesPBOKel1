@@ -12,6 +12,9 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 public class ConnectionManager {
     private static String server = "jdbc:mysql://localhost/sia";
     private static String username = "root";
@@ -23,6 +26,16 @@ public class ConnectionManager {
             connection = logOn();
         }
         return connection;
+    }
+    //putuskan koneksinya gaes
+    public static boolean cutConnection(){
+        int r = JOptionPane.showConfirmDialog(null, "Are you sure?", "Log out", JOptionPane.YES_OPTION);
+        if(r == JOptionPane.YES_OPTION){
+            logOff();//belom sukses
+            return true;
+        }else {
+            return false;
+        }
     }
     
     private static Connection logOn(){
@@ -40,12 +53,13 @@ public class ConnectionManager {
         return null;
     }
     private static void logOff(){
-        try{
+        try {
             connection.close();
             System.out.println("Connection close");
-        }catch(Exception e){
-            e.printStackTrace(System.err);
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
         }
+            
     }
     
 }
