@@ -73,9 +73,6 @@ public class LihatSaran extends JFrame{
         }
         return dimg;
     }
-    public static void main(String[] args) {
-        new LihatSaran().setVisible(true);
-    }
     JPanel pnl1;
     JPanel pnlUtama;
     JLabel lblJudul;
