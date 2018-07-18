@@ -117,10 +117,8 @@ public class Admin extends JFrame{
         btnSaran.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(ConnectionManager.cutConnection()== true){
                     dispose();
                     new LihatSaran().setVisible(true);
-                }
             }
         });
         pnlIsi.add(btnSaran);
