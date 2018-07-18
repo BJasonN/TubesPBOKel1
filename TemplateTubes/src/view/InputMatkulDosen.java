@@ -126,8 +126,17 @@ public class InputMatkulDosen extends JFrame {
                     }
                     a++;
                 }
+<<<<<<< HEAD
                 DataAkses.addMatkulDosen(cek2,ntable,tmatkul,sks);
 
+=======
+                
+                if(cek){
+                    DataAkses.addMatkulDosen2(ntable,tmatkul,sks);
+                }else{
+                    DataAkses.addMatkulDosen(ntable, tmatkul, sks);
+                }
+>>>>>>> f091b890954d72f3a84257381cf1f3ec4a6c868a
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diinput!");
             }
         });
