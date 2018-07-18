@@ -1,6 +1,7 @@
 package view;
 
 
+import dao.ConnectionManager;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -116,10 +117,8 @@ public class Admin extends JFrame{
         btnLogOut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int r = JOptionPane.showConfirmDialog(null, "Are you sure?", "Exit", JOptionPane.YES_NO_OPTION);
-                if(r == JOptionPane.YES_OPTION){
+                if(ConnectionManager.cutConnection()== true){
                     dispose();
-                    new Login().setVisible(true);
                 }
             }
         });
