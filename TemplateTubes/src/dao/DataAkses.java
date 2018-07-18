@@ -4,12 +4,14 @@
  * and open the template in the editor.
  */
 package dao;
+
 import sistem.Roster;
 /**
  *
  * @author USER
  */
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import sistem.Mahasiswa;
+import sistem.Matkul;
 import sistem.Orang;
 
 public class DataAkses {
@@ -48,10 +51,10 @@ public class DataAkses {
 
     //untuk cek login mhs
     public static ArrayList<Mahasiswa> getUsernameMhs(String pilih) {
-        
+
         ArrayList<Mahasiswa> lNama = new ArrayList<>();
         if (pilih.equals("Mahasiswa")) {
-            
+
             try {
                 Connection con = ConnectionManager.getConnection();
                 String sql = "select * from mahasiswalogin";
@@ -71,28 +74,39 @@ public class DataAkses {
         }
         return lNama;
     }
-    
+
     public static ArrayList<Orang> getUsernameDosen(String pilih) {
         ArrayList<Orang> lNamaD = new ArrayList<>();
-            try {
-                Connection con = ConnectionManager.getConnection();
-                String sql = "select * from dosenlogin";
-                Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery(sql);
+        try {
+            Connection con = ConnectionManager.getConnection();
+            String sql = "select * from dosenlogin";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
 
-                while (rs.next()) {
-                    Orang dosen = new Orang();
-                    dosen.setId(rs.getString("id"));
-                    dosen.setPassword(rs.getString("password"));
-                    dosen.setNama(rs.getString("nama"));
-                    lNamaD.add(dosen);
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+            while (rs.next()) {
+                Orang dosen = new Orang();
+                dosen.setId(rs.getString("id"));
+                dosen.setPassword(rs.getString("password"));
+                dosen.setNama(rs.getString("nama"));
+                lNamaD.add(dosen);
             }
-            return lNamaD;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return lNamaD;
     }
-    
+
+    public static String[] getNamaDosen() {
+        ArrayList<Orang> lNamaD = getUsernameDosen("Dosen");
+
+        String[] namad = new String[lNamaD.size()];
+        for (int i = 0; i < lNamaD.size(); i++) {
+            Orang org = lNamaD.get(i);
+            namad[i] = org.getNama();
+        }
+        return namad;
+    }
+
     public static List<String> getNilaiMhs(String nim, String smt, String tahun) {
         List<String> ListData = new ArrayList();
         int i = 0;
@@ -151,8 +165,8 @@ public class DataAkses {
     }
 
     public static void addMatkul(String nama, String kode, int sks) {
-        String sql = "insert into matkul values(?,?,"+sks+")";
-        
+        String sql = "insert into matkul values(?,?," + sks + ")";
+
         try {
             Connection con = ConnectionManager.getConnection();
             PreparedStatement st = con.prepareStatement(sql);
@@ -163,11 +177,92 @@ public class DataAkses {
             ex.printStackTrace();
         }
     }
-    
 
-    public static void addSaran(String nama,String nim, String saran){
+    public static ArrayList<Matkul> getNamaMatkul() {
+        ArrayList<Matkul> lmatkul = new ArrayList<>();
+        try {
+            Connection con = ConnectionManager.getConnection();
+            String sql = "select * from matkul";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                Matkul matkul =  new Matkul();
+                int sks = Integer.parseInt(rs.getString("sks"));
+                matkul.setNamaMatkul(rs.getString("nama"));
+                lmatkul.add(matkul);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return lmatkul;
+    }
+
+    public static void addMatkulDosen(String nama, String matkul, String sem,String sks) {
+        LinkedList<String> lTable = listTable();
+        int i = 0;
+        boolean cek = false;
+        String ntable = nama + sem;
+        while (i < lTable.size() && !cek) {
+
+            if (lTable.get(i).equals(ntable)) {
+                cek = true;
+            }
+            i++;
+        }
+
+        if (cek == true) {
+            String sql = "insert into"+ ntable+"(matkul,sks) values(?,?)";
+            
+            try {
+                Connection con = ConnectionManager.getConnection();
+                PreparedStatement st = con.prepareStatement(sql);
+                st.setString(1, matkul);
+                st.setString(2, sks);
+                st.executeUpdate();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }else{
+            String sql = "insert into "+ ntable+"values(?,?)";
+            String sql2="create table "+ntable+"(matkul varchar(20),"
+                    + "sks int(2),ptugas(10),pkuis(10),puts(10),puas(10);";
+            try {
+                Connection con = ConnectionManager.getConnection();
+                Statement stmt = con.createStatement(
+         ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                stmt.addBatch(sql2);
+                stmt.addBatch(sql);
+                stmt.executeBatch();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public static LinkedList<String> listTable() {
+        LinkedList<String> daftarTable = new LinkedList<>();
+        int i = 0;
+        try {
+            Connection con = ConnectionManager.getConnection();
+            DatabaseMetaData md = con.getMetaData();
+            ResultSet rs = md.getTables(null, null, "%", null);
+            while (rs.next()) {
+                daftarTable.add(rs.getString(3));
+                System.out.println(daftarTable.get(i));
+                i++;
+            }
+            con.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return daftarTable;
+    }
+
+    public static void addSaran(String nama, String nim, String saran) {
         String sql = "insert into saran values(?,?,?)";
-        
+
         try {
             Connection con = ConnectionManager.getConnection();
             PreparedStatement st = con.prepareStatement(sql);
@@ -181,35 +276,35 @@ public class DataAkses {
     }
 
     //masukin data ke roster
-    public static void addRoster(String dosen,String matkul, String tgl, String ruangan, String jam, String hari){
-        try{
-            String sql = "insert into roster(dosen,matkul,tgl,ruangan,jam,hari)"+
-                    "values('"+dosen+"','"+matkul+"','"+tgl+"','"+ruangan+"','"+jam+"','"+hari+"')";
-            
+    public static void addRoster(String dosen, String matkul, String tgl, String ruangan, String jam, String hari) {
+        try {
+            String sql = "insert into roster(dosen,matkul,tgl,ruangan,jam,hari)"
+                    + "values('" + dosen + "','" + matkul + "','" + tgl + "','" + ruangan + "','" + jam + "','" + hari + "')";
+
             Connection con = ConnectionManager.getConnection();
             Statement st = con.createStatement();
             st.executeUpdate(sql);
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
     //hapus data dari roster
-    
+
     //tampilin data roster
     //input string tanggal awal sampai akhir selama seminggu
     //mereturn linkedlist berisi data di database
-    public static LinkedList<Roster> viewRoster(String tgl){
+    public static LinkedList<Roster> viewRoster(String tgl) {
         LinkedList<Roster> llRoster = new LinkedList<>();
         String[] arrTgl = tgl.split(" ");
         String tgl1 = arrTgl[1];
         String tgl2 = arrTgl[3];
-        try{
+        try {
             Connection con = ConnectionManager.getConnection();
-            String sql = "select * from roster where tgl >="+tgl1+" and tgl <="+tgl2;
+            String sql = "select * from roster where tgl >=" + tgl1 + " and tgl <=" + tgl2;
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
-            
-            while (rs.next()){
+
+            while (rs.next()) {
                 Roster roster = new Roster();
                 roster.setDosen(rs.getString(1));
                 roster.setMatkul(rs.getString(2));
@@ -219,7 +314,7 @@ public class DataAkses {
                 roster.setHari(rs.getString(6));
                 llRoster.add(roster);
             }
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return llRoster;

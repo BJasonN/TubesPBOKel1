@@ -7,6 +7,7 @@ package view;
  */
 
 
+import dao.DataAkses;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -15,7 +16,9 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import javax.swing.ComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -24,6 +27,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+import sistem.Matkul;
 
 /**
  *
@@ -61,17 +65,24 @@ public class InputMatkulDosen extends JFrame{
         lbldosen= new JLabel("Dosen : ");
         pnl1.add(lbldosen);
         lbldosen.setBounds(380,300, 100, 30);
+        
+        String[] lldosen = DataAkses.getNamaDosen();
         lbldosen.setFont(new Font("Arial",Font.BOLD,15));
-        dosen= new JComboBox();
+        dosen= new JComboBox(lldosen);
         dosen.setBounds(480,300 , 100, 20);
         pnl1.add(dosen);
-        
         
         lblmatkul = new JLabel("Mata Kuliah : ");
         pnl1.add(lblmatkul);
         lblmatkul.setBounds(380,350, 100, 30);
         lblmatkul.setFont(new Font("Arial",Font.BOLD,15));
-        matkul= new JComboBox();
+        
+        ArrayList<Matkul> lmatkul = DataAkses.getNamaMatkul();
+        String[] rmatkul = new String[lmatkul.size()];
+        for (int i = 0; i < lmatkul.size(); i++) {
+            rmatkul[i] = lmatkul.get(i).getNamaMatkul();
+        }
+        matkul= new JComboBox(rmatkul);
         matkul.setBounds(480,350, 100, 20);
         pnl1.add(matkul);
         
@@ -79,7 +90,9 @@ public class InputMatkulDosen extends JFrame{
         pnl1.add(lblsemester);
         lblsemester.setBounds(380,400, 100, 30);
         lblsemester.setFont(new Font("Arial",Font.BOLD,15));
-        semester= new JComboBox();
+        
+        String [] sem = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14"};
+        semester= new JComboBox(sem);
         semester.setBounds(480,400, 100, 20);
         pnl1.add(semester);
         
@@ -88,6 +101,22 @@ public class InputMatkulDosen extends JFrame{
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                
+                String tdosen = String.valueOf(dosen.getSelectedItem());
+                String tmatkul = String.valueOf(matkul.getSelectedItem());
+                String tsem = String.valueOf(semester.getSelectedItem());
+                String sks = null;
+                boolean cek = false;
+                int i=0;
+                while(cek ==false && i<lmatkul.size()){
+                    if(lmatkul.get(i).getNamaMatkul().equals("tmatkul")){
+                        sks = Integer.toString(lmatkul.get(i).getSks());
+                        cek = true;
+                    }
+                }
+                
+                DataAkses.addMatkulDosen(tdosen, tmatkul, tsem,sks);
+                
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diinput!");
             }
         });
@@ -115,6 +144,10 @@ public class InputMatkulDosen extends JFrame{
             ex.printStackTrace(System.err);
         }
         return dimg;
+    }
+    
+    public static void main(String[] args) {
+        new InputMatkulDosen().setVisible(true);
     }
     
     JPanel pnl1;
