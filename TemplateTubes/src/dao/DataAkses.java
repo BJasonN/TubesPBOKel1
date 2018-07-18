@@ -113,7 +113,10 @@ public class DataAkses {
         return lNamaD;
     }
 
+<<<<<<< HEAD
 //<<<<<<< HEAD
+=======
+>>>>>>> 5077e01a712b6f37985c0027c09254526672ca77
     public static String[] getNamaDosen() {
         ArrayList<Orang> lNamaD = getUsernameDosen("Dosen");
 
@@ -125,8 +128,11 @@ public class DataAkses {
         return namad;
     }
 
+<<<<<<< HEAD
 //=======
 //>>>>>>> 5d5204c91549a285d2e43c8bcba0ea96b24268db
+=======
+>>>>>>> 5077e01a712b6f37985c0027c09254526672ca77
     public static List<String> getNilaiMhs(String nim, String smt, String tahun) {
         List<String> ListData = new ArrayList();
         int i = 0;
@@ -227,7 +233,10 @@ public class DataAkses {
         }
     }
 
+<<<<<<< HEAD
 //<<<<<<< HEAD
+=======
+>>>>>>> 5077e01a712b6f37985c0027c09254526672ca77
     public static ArrayList<Matkul> getNamaMatkul() {
         ArrayList<Matkul> lmatkul = new ArrayList<>();
         try {
@@ -301,8 +310,11 @@ public class DataAkses {
         return daftarTable;
     }
 
+<<<<<<< HEAD
 //=======
 //>>>>>>> 5d5204c91549a285d2e43c8bcba0ea96b24268db
+=======
+>>>>>>> 5077e01a712b6f37985c0027c09254526672ca77
     public static void addSaran(String nama, String nim, String saran) {
         String sql = "insert into saran values(?,?,?)";
 
@@ -333,8 +345,11 @@ public class DataAkses {
     }
 
     //hapus data dari roster
+<<<<<<< HEAD
 //<<<<<<< HEAD
 //=======
+=======
+>>>>>>> 5077e01a712b6f37985c0027c09254526672ca77
     public static void delRoster(String jam, String hari, String tgl) {
         try {
             Connection con = ConnectionManager.getConnection();
@@ -345,7 +360,10 @@ public class DataAkses {
             ex.printStackTrace();
         }
     }
+<<<<<<< HEAD
 //>>>>>>> 5d5204c91549a285d2e43c8bcba0ea96b24268db
+=======
+>>>>>>> 5077e01a712b6f37985c0027c09254526672ca77
 
     //tampilin data roster
     //input string tanggal awal sampai akhir selama seminggu
