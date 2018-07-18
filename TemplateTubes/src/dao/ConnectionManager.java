@@ -52,7 +52,7 @@ public class ConnectionManager {
         }
         return null;
     }
-    public static void logOff(){
+    private static void logOff(){
         try {
             connection.close();
             System.out.println("Connection close");
