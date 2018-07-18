@@ -112,8 +112,21 @@ public class Admin extends JFrame{
         });
         pnlIsi.add(btnTambahMatkul);
         
+        btnSaran = new JButton("Lihat Saran");
+        btnSaran.setBounds(550, 200, 300, 25);
+        btnSaran.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(ConnectionManager.cutConnection()== true){
+                    dispose();
+                    new LihatSaran().setVisible(true);
+                }
+            }
+        });
+        pnlIsi.add(btnSaran);
+        
         btnLogOut = new JButton("Log Out");
-        btnLogOut.setBounds(550, 200, 300, 25);
+        btnLogOut.setBounds(350, 250, 300, 25);
         btnLogOut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -135,10 +148,14 @@ public class Admin extends JFrame{
         return dimg;
     }
     
+    public static void main(String[] args) {
+        new Admin().setVisible(true);
+    }
     private JPanel pnlUtama;
     private JPanel pnlIsi;
     private JLabel lblJudul;
     private JLabel lblAdmin;
+    private JButton btnSaran;
     private JButton btnAddDel;
     private JButton btnInputMatkulMhs;
     private JButton btnLogOut;

@@ -19,11 +19,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import sistem.KotakSaran;
 import sistem.Mahasiswa;
 import sistem.Matkul;
 import sistem.Orang;
+import view.Saran;
 
 public class DataAkses {
+
     //output untuk menunjukkan nama dosen/mhs yg mau dihapus
     public static String[] getNama(String pilih) {
         String[] arrNama = {};
@@ -45,7 +48,7 @@ public class DataAkses {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
-        }else{
+        } else {
             try {
                 Connection con = ConnectionManager.getConnection();
                 String sql = "select * from dosenlogin";
@@ -170,14 +173,14 @@ public class DataAkses {
         try {
             Connection con = ConnectionManager.getConnection();
             Statement st = con.createStatement();
-            String sql="";
+            String sql = "";
             if (pilihan.equals("Mahasiswa")) {
                 sql = "insert into mahasiswalogin(nama,nim,password,gender)"
                         + "values('" + nama + "','" + id + "','" + pass + "','" + gender + "');";
             } else {
                 sql = "insert into dosenlogin(id,nama,password,gender)"
                         + "values('" + id + "','" + nama + "','" + pass + "','" + gender + "');";
-                
+
                 st.executeUpdate(sql);
             }
             st.executeUpdate(sql);
@@ -189,7 +192,7 @@ public class DataAkses {
     public static void delUser(String nama, String pilihan) {
 
         if (pilihan.equals("Mahasiswa")) {
-            
+
             try {
                 Connection con = ConnectionManager.getConnection();
                 Statement st = con.createStatement();
@@ -198,12 +201,12 @@ public class DataAkses {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
-        }else{
+        } else {
             try {
                 Connection con = ConnectionManager.getConnection();
                 Statement st = con.createStatement();
                 String sql = "delete from dosenlogin where nama='" + nama + "'";
-                
+
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
@@ -233,7 +236,7 @@ public class DataAkses {
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
-                Matkul matkul =  new Matkul();
+                Matkul matkul = new Matkul();
                 int sks = Integer.parseInt(rs.getString("sks"));
                 matkul.setNamaMatkul(rs.getString("nama"));
                 lmatkul.add(matkul);
@@ -244,7 +247,7 @@ public class DataAkses {
         return lmatkul;
     }
 
-    public static void addMatkulDosen(String nama, String matkul, String sem,String sks) {
+    public static void addMatkulDosen(String nama, String matkul, String sem, String sks) {
         LinkedList<String> lTable = listTable();
         int i = 0;
         boolean cek = false;
@@ -258,8 +261,8 @@ public class DataAkses {
         }
 
         if (cek == true) {
-            String sql = "insert into"+ ntable+"(matkul,sks) values(?,?)";
-            
+            String sql = "insert into" + ntable + "(matkul,sks) values(?,?)";
+
             try {
                 Connection con = ConnectionManager.getConnection();
                 PreparedStatement st = con.prepareStatement(sql);
@@ -269,14 +272,14 @@ public class DataAkses {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
-        }else{
-            String sql = "insert into "+ ntable+"values(?,?)";
-            String sql2="create table "+ntable+"(matkul varchar(20),"
+        } else {
+            String sql = "insert into " + ntable + "values(?,?)";
+            String sql2 = "create table " + ntable + "(matkul varchar(20),"
                     + "sks int(2),ptugas(10),pkuis(10),puts(10),puas(10);";
             try {
                 Connection con = ConnectionManager.getConnection();
                 Statement stmt = con.createStatement(
-         ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                        ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
                 stmt.addBatch(sql2);
                 stmt.addBatch(sql);
                 stmt.executeBatch();
@@ -375,5 +378,35 @@ public class DataAkses {
             ex.printStackTrace();
         }
         return llRoster;
+    }
+
+    public static String[][] getSaran() {
+        LinkedList<KotakSaran> lsaran = new LinkedList<>();
+        String[][] daftarsaran=null;
+        try {
+            Connection con = ConnectionManager.getConnection();
+            String sql = "select * from saran";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                KotakSaran saran = new KotakSaran();
+                Mahasiswa mhs = new Mahasiswa();
+                mhs.setNama(rs.getString("nama"));
+                mhs.setId(rs.getString("nim"));
+                saran.setIsiFeedBack(rs.getString("saran"));
+                saran.setMhs(mhs);
+                lsaran.add(saran);
+            }
+            daftarsaran = new String[lsaran.size()][3];
+            for (int i = 0; i < lsaran.size(); i++) {
+                daftarsaran[i][0] = lsaran.get(i).getMhs().getId();
+                daftarsaran[i][1] = lsaran.get(i).getMhs().getNama();
+                daftarsaran[i][2] = lsaran.get(i).getIsiFeedBack();
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return daftarsaran;
     }
 }
