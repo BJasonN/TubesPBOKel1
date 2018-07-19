@@ -29,6 +29,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+import sistem.MainSistem;
 import sistem.Matkul;
 
 public class InputNilai extends JFrame{
@@ -143,7 +144,7 @@ public class InputNilai extends JFrame{
                 String sem = String.valueOf(cbbSemester.getSelectedItem());
                 String namaMhs = String.valueOf(cbbMhs.getSelectedItem());
                 String matkul = String.valueOf(cbbMatKul.getSelectedItem());
-                DataAkses.inputNilai(tugas, kuis, uts, uas, namaMhs, matkul, sem);
+                DataAkses.inputNilai(tugas, kuis, uts, uas, namaMhs, matkul, sem,MainSistem.nama);
                 JOptionPane.showMessageDialog(null, "Data berhasil terinput!");
             }
         });

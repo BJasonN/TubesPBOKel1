@@ -17,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import sistem.KotakSaran;
@@ -503,19 +504,73 @@ public class DataAkses {
         return daftarsaran;
     }
 
-    public static void inputNilai(String tugas, String kuis, String uts, String uas, String nama, String matkul, String sem) {
+    public static void inputNilai(String tugas, String kuis, String uts, String uas, String nama, String matkul, String sem,String namadosen) {
         try {
             Connection con = ConnectionManager.getConnection();
             Statement st = con.createStatement();
             String namaTable = nama+sem;
+            
+            char index=hitungNilai(tugas,kuis,uts,uas,matkul,sem,namadosen);
+            
             String sql = "update "+namaTable+" set nilaitugas = "+Float.valueOf(tugas)+","
                     + "nilaikuis = "+Float.valueOf(kuis)+","
                     + "nilaiuts = "+Float.valueOf(uts)+","
-                    + "nilaiuas = "+Float.valueOf(uas)+
-                    " where matkul='"+matkul+"';";
+                    + "nilaiuas = "+Float.valueOf(uas)
+                    +"indeks = '"+index+
+                    "' where matkul='"+matkul+"';";
             st.executeUpdate(sql);
         }catch(SQLException ex){
             ex.printStackTrace();
         }
+    }
+    public static Matkul getPersentase(String matkul,String ntable){
+        String sql = "select * from $tableName where matkul='"+matkul+"';";
+        Matkul dmatkul= new Matkul();
+        try {
+            Connection con = ConnectionManager.getConnection();
+            Statement st = con.createStatement();
+            ResultSet rs=st.executeQuery(sql);
+            
+            float ptugas=Float.valueOf(rs.getString("ptugas"));
+            float pkuis=Float.valueOf(rs.getString("pkuis"));
+            float puts=Float.valueOf(rs.getString("puts"));
+            float puas=Float.valueOf(rs.getString("puas"));
+            
+            HashMap<String,Float>lpmatkul=new HashMap<>();
+            lpmatkul.put("tugas", ptugas);
+            lpmatkul.put("kuis", pkuis);
+            lpmatkul.put("uts", puts);
+            lpmatkul.put("uas", puas);
+            dmatkul.setNamaMatkul(matkul);
+            dmatkul.setPresentaseNilai(lpmatkul);
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return dmatkul;
+    }
+    public static char hitungNilai(String tugas,String kuis,String uts,String uas,String matkul,String sem,String namadosen){
+        String namaTable2=namadosen+sem;
+        char index;
+        Matkul dmatkul=getPersentase(matkul,namaTable2);
+        float ptugas=dmatkul.getPresentaseNilai().get("tugas");
+        float pkuis=dmatkul.getPresentaseNilai().get("kuis");
+        float puts=dmatkul.getPresentaseNilai().get("uts");
+        float puas=dmatkul.getPresentaseNilai().get("uas");
+        float nakhir=ptugas*Float.valueOf(tugas)+pkuis*Float.valueOf(kuis)+puts*Float.valueOf(uts)+puas*Float.valueOf(uas);
+        
+        
+        if(nakhir>80){
+            index='A';
+        }else if(nakhir>70){
+            index='B';
+        }else if(nakhir>60){
+            index='C';
+        }else if(nakhir>50){
+            index='D';
+        }else{
+            index='E';
+        }
+        
+        return index;
     }
 }

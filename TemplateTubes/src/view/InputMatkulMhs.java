@@ -27,6 +27,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+import sistem.MainSistem;
 import sistem.Matkul;
 
 /**
@@ -118,7 +119,6 @@ public class InputMatkulMhs extends JFrame{
                     i++;
                 }
                 String ntable = tmhs+ tsem;
-                
                 DataAkses.addBuatTableMatkulMhs(ntable, tmatkul, sks);
                 DataAkses.addMatkulMhs(ntable, tmatkul, sks);
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diinput!");
