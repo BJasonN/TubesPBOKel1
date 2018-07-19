@@ -351,7 +351,7 @@ public class DataAkses {
    //untuk tambah matkul yang ditambah diambil matkul
     public static void addMatkulMhs(String ntable, String matkul, String sks) {
         
-        String sql = "insert into $tableName values('"+matkul +"','" + sks + "','0.0','0.0','0.0','0.0')";
+        String sql = "insert into $tableName values('"+matkul +"','" + sks + "','0.0','0.0','0.0','0.0','a')";
         try {
             String query =sql.replace("$tableName",ntable);
             Connection con = ConnectionManager.getConnection();
@@ -370,7 +370,7 @@ public class DataAkses {
             +"nilaitugas float(10),"
             +"nilaikuis float(10),"
             +"nilaiuts float(10),"
-            +"nilaiuas float(10)"
+            +"nilaiuas float(10),"
             + "indeks char(1))";
         try {
             String query =sql.replace("$tableName",ntable);
@@ -509,13 +509,12 @@ public class DataAkses {
             Connection con = ConnectionManager.getConnection();
             Statement st = con.createStatement();
             String namaTable = nama+sem;
-            
             char index=hitungNilai(tugas,kuis,uts,uas,matkul,sem,namadosen);
             
             String sql = "update "+namaTable+" set nilaitugas = "+Float.valueOf(tugas)+","
                     + "nilaikuis = "+Float.valueOf(kuis)+","
                     + "nilaiuts = "+Float.valueOf(uts)+","
-                    + "nilaiuas = "+Float.valueOf(uas)
+                    + "nilaiuas = "+Float.valueOf(uas)+","
                     +"indeks = '"+index+
                     "' where matkul='"+matkul+"';";
             st.executeUpdate(sql);
@@ -524,14 +523,14 @@ public class DataAkses {
         }
     }
     public static Matkul getPersentase(String matkul,String ntable){
-        String sql = "select * from $ntable where matkul='"+matkul+"';";
+        String sql = "select * from "+ntable+" where matkul='"+matkul+"';";
         Matkul dmatkul= new Matkul();
+        System.out.println("test");
         try {
-            String query = sql.replace("$ntable", ntable);
             
             Connection con = ConnectionManager.getConnection();
             Statement st = con.createStatement();
-            ResultSet rs=st.executeQuery(query);
+            ResultSet rs=st.executeQuery(sql);
             
             float ptugas=Float.valueOf(rs.getString("ptugas"));
             float pkuis=Float.valueOf(rs.getString("pkuis"));
@@ -554,6 +553,7 @@ public class DataAkses {
         String namaTable2=namadosen+sem;
         char index;
         Matkul dmatkul=getPersentase(matkul,namaTable2);
+        
         float ptugas=dmatkul.getPresentaseNilai().get("tugas");
         float pkuis=dmatkul.getPresentaseNilai().get("kuis");
         float puts=dmatkul.getPresentaseNilai().get("uts");
