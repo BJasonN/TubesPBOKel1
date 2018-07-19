@@ -144,15 +144,16 @@ public class DataAkses {
 
     public static List<String> getNilaiMhs(String ntable, String tahun) {
         List<String> ListData = new ArrayList();
-        int i = 0;
-        String sql = "select * from '"+ntable+"' where tahun = '"+tahun+"'";
+        String sql = "select * from "+ntable;
         try {
             Connection con = ConnectionManager.getConnection();
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
+            
             while(rs.next()){
-                ListData.add(rs.getString(i));
-                i++;
+                //disimpen per array dipisah ,
+                ListData.add(rs.getString(1)+","+rs.getString(3)+","+rs.getString(4)+","+rs.getString(5)+","+rs.getString(6)+","+rs.getString(7));
+                
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

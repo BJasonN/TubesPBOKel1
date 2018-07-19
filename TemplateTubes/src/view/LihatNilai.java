@@ -65,10 +65,10 @@ public class LihatNilai extends JFrame{
         cbbSem.setBounds(150, 100, 100, 25);
         pnlIsi.add(cbbSem);
         
-        Object[] thnSem = {"2014", "2015", "2016", "2017", "2018"};
-        cbbThnSem = new JComboBox(thnSem);
-        cbbThnSem.setBounds(150, 125, 100, 25);
-        pnlIsi.add(cbbThnSem);
+//        Object[] thnSem = {"2014", "2015", "2016", "2017", "2018"};
+//        cbbThnSem = new JComboBox(thnSem);
+//        cbbThnSem.setBounds(150, 125, 100, 25);
+//        pnlIsi.add(cbbThnSem);
         
         btnSubmit = new JButton("Submit");
         btnSubmit.setBounds(150, 175, 100, 50);
@@ -85,10 +85,18 @@ public class LihatNilai extends JFrame{
                 String ntable = idAktif+smt;
                 //isi tabel didapatkan dari akses database
                 ListData = DataAkses.getNilaiMhs(ntable, tahun);
-                ArrData = ListData.toArray(new String[ListData.size()]);//gimana caranya ga error==>lu masukin array 1D ke 2D
+//                ArrData = ListData.toArray(new String[ListData.size()]);//gimana caranya ga error==>lu masukin array 1D ke 2D
                 //bangun array berisi header dan isi tabel
-                Object[] header = {"Matkul", "1", "2", "3", "4", "5", "UTS", "UAS", "AA", "Index"};
-                Object[][] isiPerRow = (Object[][])(Object)ArrData;
+                String[] header = {"Matkul", "Tugas","Kuis", "UTS", "UAS", "Index"};
+                String[][] isiPerRow = new String[ListData.size()][6];
+                for(int i = 0; i < ListData.size(); i++){
+                    //dipecah
+                    String[] arrSplit = ListData.get(i).split(",");
+                    for(int j = 0; j < 6; j++){
+                        
+                        isiPerRow[i][j]=arrSplit[j];
+                    }
+                }
                 //add nilai ke tabel
                 tblLihatNilai = new JTable(isiPerRow, header);
                 scroll = new JScrollPane(tblLihatNilai);
