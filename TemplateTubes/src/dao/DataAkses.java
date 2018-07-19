@@ -127,6 +127,17 @@ public class DataAkses {
         return namad;
     }
 
+    public static String[] getNamaMhs() {
+        ArrayList<Mahasiswa> lNamaM = getUsernameMhs("Mahasiswa");
+
+        String[] namaM = new String[lNamaM.size()];
+        for (int i = 0; i < lNamaM.size(); i++) {
+            Mahasiswa org = lNamaM.get(i);
+            namaM[i] = org.getNama();
+        }
+        return namaM;
+    }
+    
     public static List<String> getNilaiMhs(String nim, String smt, String tahun) {
         List<String> ListData = new ArrayList();
         int i = 0;
@@ -239,6 +250,7 @@ public class DataAkses {
             while (rs.next()) {
                 Matkul matkul = new Matkul();
                 int sks = Integer.parseInt(rs.getString("sks"));
+                matkul.setSks(sks);
                 matkul.setNamaMatkul(rs.getString("nama"));
                 lmatkul.add(matkul);
             }
@@ -249,30 +261,69 @@ public class DataAkses {
     }
 
     public static void addMatkulDosen(String ntable, String matkul, String sks) {
-        String sql = "create table " + ntable + "(matkul varchar(20),sks int(2),ptugas float(10),pkuis float(10),puts float(10),puas float(10));";
-        String sql2 = "insert into " + ntable + "values('"+matkul +"','" + sks + "',0.0,0.0,0.0,0.0)";
+        
+        String sql = "insert into $tableName values('"+matkul +"','" + sks + "','0.0','0.0','0.0','0.0')";
         try {
+            String query =sql.replace("$tableName",ntable);
             Connection con = ConnectionManager.getConnection();
-            Statement stmt = con.createStatement();
-            stmt.addBatch(sql);
-            stmt.addBatch(sql2);
-            stmt.executeBatch();
+            PreparedStatement st = con.prepareStatement(query);
+            st.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
 
-    public static void addMatkulDosen2(String ntable, String matkul, String sks) {
-        String sql = "insert into " + ntable + "(matkul,sks) values('" + matkul + "','" + sks +"')";
+    public static void addBuatTableMatkulDosen(String ntable, String matkul, String sks) {
+        String sql = "create table if not exists $tableName("
+            +"matkul varchar(20),"
+            +"sks int(2),"
+            +"ptugas float(10),"
+            +"pkuis float(10),"
+            +"puts float(10),"
+            +"puas float(10))";
         try {
+            String query =sql.replace("$tableName",ntable);
             Connection con = ConnectionManager.getConnection();
-            PreparedStatement st = con.prepareStatement(sql);
-            st.executeQuery();
+            PreparedStatement st = con.prepareStatement(query);
+            st.executeUpdate();
+            System.out.println("sukses");
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
 
+    public static void addMatkulMhs(String ntable, String matkul, String sks) {
+        
+        String sql = "insert into $tableName values('"+matkul +"','" + sks + "','0.0','0.0','0.0','0.0')";
+        try {
+            String query =sql.replace("$tableName",ntable);
+            Connection con = ConnectionManager.getConnection();
+            PreparedStatement st = con.prepareStatement(query);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void addBuatTableMatkulMhs(String ntable, String matkul, String sks) {
+        String sql = "create table if not exists $tableName("
+            +"matkul varchar(20),"
+            +"sks int(2),"
+            +"nilai tugas float(10),"
+            +"nilai kuis float(10),"
+            +"nilai uts float(10),"
+            +"nilai uas float(10))";
+        try {
+            String query =sql.replace("$tableName",ntable);
+            Connection con = ConnectionManager.getConnection();
+            PreparedStatement st = con.prepareStatement(query);
+            st.executeUpdate();
+            System.out.println("sukses");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
     public static LinkedList<String> listTable() {
         LinkedList<String> daftarTable = new LinkedList<>();
         int i = 0;
@@ -282,7 +333,6 @@ public class DataAkses {
             ResultSet rs = md.getTables(null, null, "%", null);
             while (rs.next()) {
                 daftarTable.add(rs.getString(3));
-                System.out.println(daftarTable.get(i));
                 i++;
             }
 

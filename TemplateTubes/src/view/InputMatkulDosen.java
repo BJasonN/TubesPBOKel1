@@ -65,9 +65,9 @@ public class InputMatkulDosen extends JFrame {
         lbldosen = new JLabel("Dosen : ");
         pnl1.add(lbldosen);
         lbldosen.setBounds(380, 300, 100, 30);
-
-        String[] lldosen = DataAkses.getNamaDosen();
         lbldosen.setFont(new Font("Arial", Font.BOLD, 15));
+        
+        String[] lldosen = DataAkses.getNamaDosen();
         dosen = new JComboBox(lldosen);
         dosen.setBounds(480, 300, 100, 20);
         pnl1.add(dosen);
@@ -106,19 +106,19 @@ public class InputMatkulDosen extends JFrame {
                 String tmatkul = String.valueOf(matkul.getSelectedItem());
                 String tsem = String.valueOf(semester.getSelectedItem());
                 String sks = null;
+                
                 boolean cek = false;
                 int i = 0;
                 while (cek == false && i < lmatkul.size()) {
-                    if (lmatkul.get(i).getNamaMatkul().equals(tmatkul)) {
-                        sks = Integer.toString(lmatkul.get(i).getSks());
+                    Matkul matkul= lmatkul.get(i);
+                    if (matkul.getNamaMatkul().equals(tmatkul)) {
+                        sks = Integer.toString(matkul.getSks());
                         cek = true;
                     }
                     i++;
                 }
-                LinkedList<String> lTable = DataAkses.listTable();
-                int a = 0;
-                boolean cek2 = false;
                 String ntable = tdosen + tsem;
+<<<<<<< HEAD
                 while (a < lTable.size() && !cek2) {
 
                     if (lTable.get(a).equals(ntable)) {
@@ -137,6 +137,11 @@ public class InputMatkulDosen extends JFrame {
                     DataAkses.addMatkulDosen(ntable, tmatkul, sks);
                 }
 >>>>>>> f091b890954d72f3a84257381cf1f3ec4a6c868a
+=======
+
+                DataAkses.addBuatTableMatkulDosen(ntable, tmatkul, sks);
+                DataAkses.addMatkulDosen(ntable, tmatkul, sks);
+>>>>>>> branchbaru
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diinput!");
             }
         });
@@ -164,10 +169,6 @@ public class InputMatkulDosen extends JFrame {
             ex.printStackTrace(System.err);
         }
         return dimg;
-    }
-
-    public static void main(String[] args) {
-        new InputMatkulDosen().setVisible(true);
     }
 
     JPanel pnl1;
