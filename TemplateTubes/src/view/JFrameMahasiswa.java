@@ -64,7 +64,7 @@ public class JFrameMahasiswa extends JFrame{
         lblmhs.setFont(new Font("Arial",Font.BOLD,18));
         
         lnilai= new JButton("Lihat Nilai");
-        lnilai.setBounds(200,300,100,30);
+        lnilai.setBounds(430,300,100,30);
         lnilai.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -73,18 +73,18 @@ public class JFrameMahasiswa extends JFrame{
         });
         pnl1.add(lnilai);
         
-        kehadiran= new JButton("Kehadiran");
-        kehadiran.setBounds(200,350,100,30);
-        kehadiran.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new Kehadiran().setVisible(true);
-            }
-        });
-        pnl1.add(kehadiran);
+//        kehadiran= new JButton("Kehadiran");
+//        kehadiran.setBounds(200,350,100,30);
+//        kehadiran.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                new Kehadiran().setVisible(true);
+//            }
+//        });
+//        pnl1.add(kehadiran);
         
         roster= new JButton("Roster");
-        roster.setBounds(200,400,100,30);
+        roster.setBounds(430,350,100,30);
         roster.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -94,7 +94,7 @@ public class JFrameMahasiswa extends JFrame{
         pnl1.add(roster);
         
         saran= new JButton("Saran");
-        saran.setBounds(200,450,100,30);
+        saran.setBounds(430,400,100,30);
         saran.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -105,7 +105,7 @@ public class JFrameMahasiswa extends JFrame{
         pnl1.add(saran);
         
         logout= new JButton("Logout");
-        logout.setBounds(650,300,100,30);
+        logout.setBounds(430,450,100,30);
         logout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -55,18 +55,18 @@ public class Dosen extends JFrame{
         lblDosen.setBounds(480, 40, 400, 50);
         pnlIsi.add(lblDosen);
         
-        btnKehadiran = new JButton("Input Kehadiran");
-        btnKehadiran.setBounds(150, 100, 300, 25);
-        btnKehadiran.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new Kehadiran().setVisible(true);
-            }
-        });
-        pnlIsi.add(btnKehadiran);
+//        btnKehadiran = new JButton("Input Kehadiran");
+//        btnKehadiran.setBounds(150, 100, 300, 25);
+//        btnKehadiran.addActionListener(new ActionListener(){
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                new Kehadiran().setVisible(true);
+//            }
+//        });
+//        pnlIsi.add(btnKehadiran);
         
         btnInputNilai = new JButton("Input Nilai");
-        btnInputNilai.setBounds(150, 150, 300, 25);
+        btnInputNilai.setBounds(150, 100, 300, 25);
         btnInputNilai.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -77,7 +77,7 @@ public class Dosen extends JFrame{
         pnlIsi.add(btnInputNilai);
         
         btnInputPrsn = new JButton("Set Persentase");
-        btnInputPrsn.setBounds(150, 200, 300, 25);
+        btnInputPrsn.setBounds(150, 150, 300, 25);
         btnInputPrsn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
