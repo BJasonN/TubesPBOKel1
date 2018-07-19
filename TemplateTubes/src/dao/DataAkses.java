@@ -518,12 +518,14 @@ public class DataAkses {
         }
     }
     public static Matkul getPersentase(String matkul,String ntable){
-        String sql = "select * from $tableName where matkul='"+matkul+"';";
+        String sql = "select * from $ntable where matkul='"+matkul+"';";
         Matkul dmatkul= new Matkul();
         try {
+            String query = sql.replace("$ntable", ntable);
+            
             Connection con = ConnectionManager.getConnection();
             Statement st = con.createStatement();
-            ResultSet rs=st.executeQuery(sql);
+            ResultSet rs=st.executeQuery(query);
             
             float ptugas=Float.valueOf(rs.getString("ptugas"));
             float pkuis=Float.valueOf(rs.getString("pkuis"));
