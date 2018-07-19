@@ -18,11 +18,6 @@ public class MainSistem {
     public static String nim;
     
     public static void main(String[] args) {
-        DosenMatkul dosenMatkul = new DosenMatkul();
-        KotakSaran kotakSaran = new KotakSaran();
-        Roster roster = new Roster();
-        KehadiranSatuSemesterPerMahasiswa kehadiran1SemPerMhs = new KehadiranSatuSemesterPerMahasiswa();
-        
         new Login().setVisible(true);
         
     }
