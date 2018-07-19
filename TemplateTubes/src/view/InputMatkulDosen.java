@@ -153,16 +153,16 @@ public class InputMatkulDosen extends JFrame {
     public static void main(String[] args) {
         new InputMatkulDosen().setVisible(true);
     }
-    JPanel pnl1;
-    JPanel pnlUtama;
-    JLabel lblJudul;
-    JLabel lblinputmatkul;
-    JLabel lblmatkul;
-    JLabel lbldosen;
-    JLabel lblsemester;
-    JButton submit;
-    JButton back;
-    JComboBox dosen;
-    JComboBox matkul;
-    JComboBox semester;
+    private JPanel pnl1;
+    private JPanel pnlUtama;
+    private JLabel lblJudul;
+    private JLabel lblinputmatkul;
+    private JLabel lblmatkul;
+    private JLabel lbldosen;
+    private JLabel lblsemester;
+    private JButton submit;
+    private JButton back;
+    private JComboBox dosen;
+    private JComboBox matkul;
+    private JComboBox semester;
 }

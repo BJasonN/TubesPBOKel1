@@ -202,20 +202,20 @@ public class Login extends JFrame {
         return dimg;
     }
 
-    JPanel pnlUtama;
-    JPanel pnl1;
-    JLabel lbltlogin;
-    JLabel plogin;
-    JLabel lblJudul;
-    JLabel lbllogin;
-    JLabel lblpassword;
-    JLabel lblid;
-    JComboBox login;
-    JButton mhs;
-    JButton dosen;
-    JButton admin;
-    JButton submit;
-    JPasswordField password;
-    JTextField id;
+    private JPanel pnlUtama;
+    private JPanel pnl1;
+    private JLabel lbltlogin;
+    private JLabel plogin;
+    private JLabel lblJudul;
+    private JLabel lbllogin;
+    private JLabel lblpassword;
+    private JLabel lblid;
+    private JComboBox login;
+    private JButton mhs;
+    private JButton dosen;
+    private JButton admin;
+    private JButton submit;
+    private JPasswordField password;
+    private JTextField id;
 
 }

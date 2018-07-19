@@ -73,10 +73,10 @@ public class LihatSaran extends JFrame{
         }
         return dimg;
     }
-    JPanel pnl1;
-    JPanel pnlUtama;
-    JLabel lblJudul;
-    JTable table;
-    JScrollPane scroll;
-    JLabel lbllihatsaran;
+    private JPanel pnl1;
+    private JPanel pnlUtama;
+    private JLabel lblJudul;
+    private JTable table;
+    private JScrollPane scroll;
+    private JLabel lbllihatsaran;
 }
