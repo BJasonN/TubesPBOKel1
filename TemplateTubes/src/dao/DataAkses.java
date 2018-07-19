@@ -137,7 +137,7 @@ public class DataAkses {
         }
         return namaM;
     }
-    
+
     public static List<String> getNilaiMhs(String nim, String smt, String tahun) {
         List<String> ListData = new ArrayList();
         int i = 0;
@@ -207,9 +207,9 @@ public class DataAkses {
                 Connection con = ConnectionManager.getConnection();
                 Statement st = con.createStatement();
                 String sql = "delete from mahasiswalogin where nama='" + nama + "'";
-                for(int i = 0; i < llTable.size(); i++){
+                for (int i = 0; i < llTable.size(); i++) {
                     String sql2 = new String();
-                    sql2 = "drop table "+llTable.get(i);
+                    sql2 = "drop table " + llTable.get(i);
                     st.addBatch(sql2);
                 }
                 st.addBatch(sql);
@@ -221,11 +221,11 @@ public class DataAkses {
             try {
                 System.out.println(nama);
                 Connection con = ConnectionManager.getConnection();
-                Statement st = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+                Statement st = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
                 String sql = "delete from dosenlogin where nama='" + nama + "';";
-                for(int i = 0; i < llTable.size(); i++){
+                for (int i = 0; i < llTable.size(); i++) {
                     String sql2 = new String();
-                    sql2 = "drop table "+llTable.get(i);
+                    sql2 = "drop table " + llTable.get(i);
                     st.addBatch(sql2);
                 }
                 st.addBatch(sql);
@@ -272,10 +272,10 @@ public class DataAkses {
     }
 
     public static void addMatkulDosen(String ntable, String matkul, String sks) {
-        
-        String sql = "insert into $tableName values('"+matkul +"','" + sks + "','0.0','0.0','0.0','0.0')";
+
+        String sql = "insert into $tableName values('" + matkul + "','" + sks + "','0.0','0.0','0.0','0.0')";
         try {
-            String query =sql.replace("$tableName",ntable);
+            String query = sql.replace("$tableName", ntable);
             Connection con = ConnectionManager.getConnection();
             PreparedStatement st = con.prepareStatement(query);
             st.executeUpdate();
@@ -286,14 +286,14 @@ public class DataAkses {
 
     public static void addBuatTableMatkulDosen(String ntable, String matkul, String sks) {
         String sql = "create table if not exists $tableName("
-            +"matkul varchar(20),"
-            +"sks int(2),"
-            +"ptugas float(10),"
-            +"pkuis float(10),"
-            +"puts float(10),"
-            +"puas float(10))";
+                + "matkul varchar(20),"
+                + "sks int(2),"
+                + "ptugas float(10),"
+                + "pkuis float(10),"
+                + "puts float(10),"
+                + "puas float(10))";
         try {
-            String query =sql.replace("$tableName",ntable);
+            String query = sql.replace("$tableName", ntable);
             Connection con = ConnectionManager.getConnection();
             PreparedStatement st = con.prepareStatement(query);
             st.executeUpdate();
@@ -304,10 +304,10 @@ public class DataAkses {
     }
 
     public static void addMatkulMhs(String ntable, String matkul, String sks) {
-        
-        String sql = "insert into $tableName values('"+matkul +"','" + sks + "','0.0','0.0','0.0','0.0')";
+
+        String sql = "insert into $tableName values('" + matkul + "','" + sks + "','0.0','0.0','0.0','0.0')";
         try {
-            String query =sql.replace("$tableName",ntable);
+            String query = sql.replace("$tableName", ntable);
             Connection con = ConnectionManager.getConnection();
             PreparedStatement st = con.prepareStatement(query);
             st.executeUpdate();
@@ -318,14 +318,14 @@ public class DataAkses {
 
     public static void addBuatTableMatkulMhs(String ntable, String matkul, String sks) {
         String sql = "create table if not exists $tableName("
-            +"matkul varchar(20),"
-            +"sks int(2),"
-            +"nilaitugas float(10),"
-            +"nilaikuis float(10),"
-            +"nilaiuts float(10),"
-            +"nilaiuas float(10))";
+                + "matkul varchar(20),"
+                + "sks int(2),"
+                + "nilaitugas float(10),"
+                + "nilaikuis float(10),"
+                + "nilaiuts float(10),"
+                + "nilaiuas float(10))";
         try {
-            String query =sql.replace("$tableName",ntable);
+            String query = sql.replace("$tableName", ntable);
             Connection con = ConnectionManager.getConnection();
             PreparedStatement st = con.prepareStatement(query);
             st.executeUpdate();
@@ -334,7 +334,7 @@ public class DataAkses {
             ex.printStackTrace();
         }
     }
-    
+
     public static LinkedList<String> listTable() {
         LinkedList<String> daftarTable = new LinkedList<>();
         int i = 0;
@@ -452,5 +452,21 @@ public class DataAkses {
             ex.printStackTrace();
         }
         return daftarsaran;
+    }
+
+    public static void inputNilai(String tugas, String kuis, String uts, String uas, String nama, String matkul, String sem) {
+        try {
+            Connection con = ConnectionManager.getConnection();
+            Statement st = con.createStatement();
+            String namaTable = nama+sem;
+            String sql = "update "+namaTable+" set nilaitugas = "+Float.valueOf(tugas)+","
+                    + "nilaikuis = "+Float.valueOf(kuis)+","
+                    + "nilaiuts = "+Float.valueOf(uts)+","
+                    + "nilaiuas = "+Float.valueOf(uas)+
+                    " where matkul='"+matkul+"';";
+            st.executeUpdate(sql);
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
     }
 }
