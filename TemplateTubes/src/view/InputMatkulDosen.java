@@ -118,30 +118,9 @@ public class InputMatkulDosen extends JFrame {
                     i++;
                 }
                 String ntable = tdosen + tsem;
-<<<<<<< HEAD
-                while (a < lTable.size() && !cek2) {
-
-                    if (lTable.get(a).equals(ntable)) {
-                        cek2 = true;
-                    }
-                    a++;
-                }
-<<<<<<< HEAD
-                DataAkses.addMatkulDosen(cek2,ntable,tmatkul,sks);
-
-=======
-                
-                if(cek){
-                    DataAkses.addMatkulDosen2(ntable,tmatkul,sks);
-                }else{
-                    DataAkses.addMatkulDosen(ntable, tmatkul, sks);
-                }
->>>>>>> f091b890954d72f3a84257381cf1f3ec4a6c868a
-=======
 
                 DataAkses.addBuatTableMatkulDosen(ntable, tmatkul, sks);
                 DataAkses.addMatkulDosen(ntable, tmatkul, sks);
->>>>>>> branchbaru
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diinput!");
             }
         });
@@ -170,6 +149,7 @@ public class InputMatkulDosen extends JFrame {
         }
         return dimg;
     }
+    
 
     JPanel pnl1;
     JPanel pnlUtama;
