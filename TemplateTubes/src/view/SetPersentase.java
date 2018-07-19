@@ -164,17 +164,21 @@ public class SetPersentase extends JFrame {
                 String pkuis = kuis.getText();
                 String puts = uts.getText();
                 String puas = uas.getText();
-                String nmatkul =(String)matkul.getSelectedItem();
-                String ntable = MainSistem.nama + smatkul;
+               
+                float ptugas2=Float.parseFloat(ptugas);
+                float pkuis2=Float.parseFloat(pkuis);
+                float puts2=Float.parseFloat(puts);
+                float puas2=Float.parseFloat(puas);
+                float total=ptugas2+pkuis2+puts2+puas2;
                 
-                
-                System.out.println(ntable);
-                System.out.println(ptugas);
-                System.out.println(pkuis);
-                System.out.println(puts);
-                System.out.println(puas);
-                DataAkses.addPersentase(ntable, nmatkul, ptugas, pkuis, puts, puas);
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diinput!");
+                if(total==100){
+                     String nmatkul =(String)matkul.getSelectedItem();
+                    String ntable = MainSistem.nama + smatkul;
+                    DataAkses.addPersentase(ntable, nmatkul, ptugas, pkuis, puts, puas);
+                    JOptionPane.showMessageDialog(null, "Data Berhasil Diinput!");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Data lebih besar atau lebih kecil dari 100%");
+                }
             }
         });
         pnl1.add(submit);

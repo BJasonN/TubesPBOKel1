@@ -330,7 +330,7 @@ public class DataAkses {
             Connection con = ConnectionManager.getConnection();
             String query =sql.replace("$tableName",ntable);
             PreparedStatement st = con.prepareStatement(query);
-            st.executeQuery();
+            st.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
