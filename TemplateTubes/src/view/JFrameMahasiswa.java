@@ -73,6 +73,7 @@ public class JFrameMahasiswa extends JFrame{
         });
         pnl1.add(lnilai);
         
+<<<<<<< HEAD
 //        kehadiran= new JButton("Kehadiran");
 //        kehadiran.setBounds(200,350,100,30);
 //        kehadiran.addActionListener(new ActionListener() {
@@ -82,6 +83,17 @@ public class JFrameMahasiswa extends JFrame{
 //            }
 //        });
 //        pnl1.add(kehadiran);
+=======
+        kehadiran= new JButton("Kehadiran");
+        kehadiran.setBounds(200,350,100,30);
+        kehadiran.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                new Kehadiran().setVisible(true);
+            }
+        });
+        pnl1.add(kehadiran);
+>>>>>>> 90a16c4359ed562697ddcc2c1b924c5ec696b524
         
         roster= new JButton("Roster");
         roster.setBounds(430,350,100,30);
