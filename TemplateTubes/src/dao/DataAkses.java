@@ -360,7 +360,7 @@ public class DataAkses {
             ex.printStackTrace();
         }
     }
-
+    
     //untuk membuat tabel matkul yang diambil seorang mahasiswa pada semester tertentu
     public static void addBuatTableMatkulMhs(String ntable, String matkul, String sks) {
         String sql = "create table if not exists $tableName("
@@ -369,7 +369,8 @@ public class DataAkses {
             +"nilaitugas float(10),"
             +"nilaikuis float(10),"
             +"nilaiuts float(10),"
-            +"nilaiuas float(10))";
+            +"nilaiuas float(10)"
+            + "indeks char(1))";
         try {
             String query =sql.replace("$tableName",ntable);
             Connection con = ConnectionManager.getConnection();
