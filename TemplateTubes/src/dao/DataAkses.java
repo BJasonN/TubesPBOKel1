@@ -142,18 +142,15 @@ public class DataAkses {
         return namaM;
     }
 
-    public static List<String> getNilaiMhs(String nim, String smt, String tahun) {
+    public static List<String> getNilaiMhs(String ntable, String tahun) {
         List<String> ListData = new ArrayList();
         int i = 0;
-        //buat dapet data buat lihat nilai dan kehadiran
+        String sql = "select * from '"+ntable+"' where tahun = '"+tahun+"'";
         try {
             Connection con = ConnectionManager.getConnection();
-            //ambil data nilai dari tabel nama mahasiswa
-            String sql = "select matkul,nilai1,nilai2,nilai3,nilai4,nilai5,AA,index from '" + nim + "' where semester = '" + smt + "' and tahun = '" + tahun + "'";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
-            //ambil data sesuai tabel nama mahasiswa dan semester dan tahun
-            while (rs.next()) {
+            while(rs.next()){
                 ListData.add(rs.getString(i));
                 i++;
             }
@@ -163,26 +160,23 @@ public class DataAkses {
         return ListData;
     }
 
-    public static List<String> getKehadiran(String nim, String smt, String tahun) {
-        List<String> ListData = new ArrayList();
-        int i = 0;
-        //buat dapet data buat lihat nilai dan kehadiran
-        try {
-            Connection con = ConnectionManager.getConnection();
-            //ambil data kehadiran dari tabel nama mahasiswa
-            String sql = "select matkul,dosen,kehadiran from '" + nim + "' where semester = '" + smt + "' and tahun = '" + tahun + "'";
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            //ambil data sesuai tabel nama mahasiswa dan semester dan tahun
-            while (rs.next()) {
-                ListData.add(rs.getString(i));
-                i++;
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return ListData;
-    }
+//    public static List<String> getKehadiran(String ntable, String tahun) {
+//        List<String> ListData = new ArrayList();
+//        int i = 0;
+//        String sql = "select * from '"+ntable+"' where tahun = '"+tahun+"'";
+//        try {
+//            Connection con = ConnectionManager.getConnection();
+//            Statement st = con.createStatement();
+//            ResultSet rs = st.executeQuery(sql);
+//            while(rs.next()){
+//                ListData.add(rs.getString(i));
+//                i++;
+//            }
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
+//        return ListData;
+//    }
 
     public static void addUser(String nama, String id, String pass, String gender, String pilihan) {
         try {

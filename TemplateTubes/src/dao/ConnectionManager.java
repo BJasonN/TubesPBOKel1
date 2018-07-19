@@ -31,7 +31,7 @@ public class ConnectionManager {
     public static boolean cutConnection(){
         int r = JOptionPane.showConfirmDialog(null, "Are you sure?", "Log out", JOptionPane.YES_OPTION);
         if(r == JOptionPane.YES_OPTION){
-            logOff();//belom sukses
+            logOff();
             return true;
         }else {
             return false;
