@@ -1,6 +1,7 @@
 package view;
 
 import dao.DataAkses;
+import sistem.MainSistem;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -59,7 +60,7 @@ public class LihatNilai extends JFrame{
         lblLihat.setBounds(170, 40, 400, 50);
         pnlIsi.add(lblLihat);
         
-        Object[] sem = {"Ganjil", "Genap", "Pendek"};
+        Object[] sem = {"1", "2", "3", "4", "5", "6", "7", "8"};
         cbbSem = new JComboBox(sem);
         cbbSem.setBounds(150, 100, 100, 25);
         pnlIsi.add(cbbSem);
@@ -80,9 +81,10 @@ public class LihatNilai extends JFrame{
                 String tahun = (String) cbbThnSem.getSelectedItem();
                 String smt = (String) cbbSem.getSelectedItem();
                 //ambil id mahasiswa yang sedang login
-                String idAktif = Login.sid;
+                String idAktif = MainSistem.nama;
+                String ntable = idAktif+smt;
                 //isi tabel didapatkan dari akses database
-                ListData = DataAkses.getNilaiMhs(idAktif, smt, tahun);
+                ListData = DataAkses.getNilaiMhs(ntable, tahun);
                 ArrData = ListData.toArray(new String[ListData.size()]);//gimana caranya ga error==>lu masukin array 1D ke 2D
                 //bangun array berisi header dan isi tabel
                 Object[] header = {"Matkul", "1", "2", "3", "4", "5", "UTS", "UAS", "AA", "Index"};
