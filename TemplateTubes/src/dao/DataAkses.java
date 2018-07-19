@@ -95,6 +95,7 @@ public class DataAkses {
         return lNama;
     }
 
+    //untuk cek login dosen
     public static ArrayList<Orang> getUsernameDosen(String pilih) {
         ArrayList<Orang> lNamaD = new ArrayList<>();
         try {
@@ -116,6 +117,7 @@ public class DataAkses {
         return lNamaD;
     }
 
+   //untuk mendapatkan nama dosen
     public static String[] getNamaDosen() {
         ArrayList<Orang> lNamaD = getUsernameDosen("Dosen");
 
@@ -127,6 +129,7 @@ public class DataAkses {
         return namad;
     }
 
+    //untuk mendapatkan nama mhs
     public static String[] getNamaMhs() {
         ArrayList<Mahasiswa> lNamaM = getUsernameMhs("Mahasiswa");
 
@@ -236,6 +239,7 @@ public class DataAkses {
         }
     }
 
+   //untuk menambah matkul yang tersedia
     public static void addMatkul(String nama, String kode, int sks) {
         String sql = "insert into matkul values(?,?," + sks + ")";
 
@@ -271,11 +275,12 @@ public class DataAkses {
         return lmatkul;
     }
 
+    //untuk tambah matkul dosen per semester
     public static void addMatkulDosen(String ntable, String matkul, String sks) {
-
-        String sql = "insert into $tableName values('" + matkul + "','" + sks + "','0.0','0.0','0.0','0.0')";
+        
+        String sql = "insert into $tableName values('"+matkul +"','" + sks + "','0.0','0.0','0.0','0.0')";
         try {
-            String query = sql.replace("$tableName", ntable);
+            String query =sql.replace("$tableName",ntable);
             Connection con = ConnectionManager.getConnection();
             PreparedStatement st = con.prepareStatement(query);
             st.executeUpdate();
@@ -284,16 +289,17 @@ public class DataAkses {
         }
     }
 
+   //untuk buat table dosen persemester
     public static void addBuatTableMatkulDosen(String ntable, String matkul, String sks) {
         String sql = "create table if not exists $tableName("
-                + "matkul varchar(20),"
-                + "sks int(2),"
-                + "ptugas float(10),"
-                + "pkuis float(10),"
-                + "puts float(10),"
-                + "puas float(10))";
+            +"matkul varchar(20),"
+            +"sks int(2),"
+            +"ptugas float(10),"
+            +"pkuis float(10),"
+            +"puts float(10),"
+            +"puas float(10))";
         try {
-            String query = sql.replace("$tableName", ntable);
+            String query =sql.replace("$tableName",ntable);
             Connection con = ConnectionManager.getConnection();
             PreparedStatement st = con.prepareStatement(query);
             st.executeUpdate();
@@ -302,12 +308,51 @@ public class DataAkses {
             ex.printStackTrace();
         }
     }
-
-    public static void addMatkulMhs(String ntable, String matkul, String sks) {
-
-        String sql = "insert into $tableName values('" + matkul + "','" + sks + "','0.0','0.0','0.0','0.0')";
+    
+    //untuk mendapatkan matkul tertentu yang diajar oleh dosen tertentu
+    public static String[] getNamaMatkulPerDosen(String ntable) {
+        LinkedList<String> matkul=new LinkedList<>();
+        String [] lmatkul=null;
         try {
-            String query = sql.replace("$tableName", ntable);
+            Connection con = ConnectionManager.getConnection();
+            String sql = "select * from $tableName";
+            String query =sql.replace("$tableName",ntable);
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                matkul.add(rs.getString("matkul"));
+            }
+            
+            lmatkul=new String[matkul.size()];
+            for(int i=0;i<matkul.size();i++){
+                lmatkul[i]=matkul.get(i);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return lmatkul;
+    }
+    
+    //untuk set persentase nilai
+    public static void addPersentase(String ntable,String nmatkul,String ptugas,String pkuis,String puts,String puas){
+        String sql="update $tableName set ptugas="+ptugas+",pkuis="+pkuis+",puts="+puts+",puas="+puas+" where matkul='"+nmatkul+"'";
+        try {
+            Connection con = ConnectionManager.getConnection();
+            String query =sql.replace("$tableName",ntable);
+            PreparedStatement st = con.prepareStatement(query);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+   //untuk tambah matkul yang ditambah diambil matkul
+    public static void addMatkulMhs(String ntable, String matkul, String sks) {
+        
+        String sql = "insert into $tableName values('"+matkul +"','" + sks + "','0.0','0.0','0.0','0.0')";
+        try {
+            String query =sql.replace("$tableName",ntable);
             Connection con = ConnectionManager.getConnection();
             PreparedStatement st = con.prepareStatement(query);
             st.executeUpdate();
@@ -316,16 +361,17 @@ public class DataAkses {
         }
     }
 
+    //untuk membuat tabel matkul yang diambil seorang mahasiswa pada semester tertentu
     public static void addBuatTableMatkulMhs(String ntable, String matkul, String sks) {
         String sql = "create table if not exists $tableName("
-                + "matkul varchar(20),"
-                + "sks int(2),"
-                + "nilaitugas float(10),"
-                + "nilaikuis float(10),"
-                + "nilaiuts float(10),"
-                + "nilaiuas float(10))";
+            +"matkul varchar(20),"
+            +"sks int(2),"
+            +"nilai tugas float(10),"
+            +"nilai kuis float(10),"
+            +"nilai uts float(10),"
+            +"nilai uas float(10))";
         try {
-            String query = sql.replace("$tableName", ntable);
+            String query =sql.replace("$tableName",ntable);
             Connection con = ConnectionManager.getConnection();
             PreparedStatement st = con.prepareStatement(query);
             st.executeUpdate();
@@ -334,7 +380,8 @@ public class DataAkses {
             ex.printStackTrace();
         }
     }
-
+    
+    //untuk melihat list table yang ada
     public static LinkedList<String> listTable() {
         LinkedList<String> daftarTable = new LinkedList<>();
         int i = 0;
@@ -353,6 +400,7 @@ public class DataAkses {
         return daftarTable;
     }
 
+    //untuk tambah saran 
     public static void addSaran(String nama, String nim, String saran) {
         String sql = "insert into saran values(?,?,?)";
 
