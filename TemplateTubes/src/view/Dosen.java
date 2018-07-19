@@ -55,7 +55,7 @@ public class Dosen extends JFrame{
         lblDosen.setBounds(480, 40, 400, 50);
         pnlIsi.add(lblDosen);
         
-        btnKehadiran = new JButton("Kehadiran");
+        btnKehadiran = new JButton("Input Kehadiran");
         btnKehadiran.setBounds(150, 100, 300, 25);
         btnKehadiran.addActionListener(new ActionListener(){
             @Override

@@ -366,10 +366,10 @@ public class DataAkses {
         String sql = "create table if not exists $tableName("
             +"matkul varchar(20),"
             +"sks int(2),"
-            +"nilai tugas float(10),"
-            +"nilai kuis float(10),"
-            +"nilai uts float(10),"
-            +"nilai uas float(10))";
+            +"nilaitugas float(10),"
+            +"nilaikuis float(10),"
+            +"nilaiuts float(10),"
+            +"nilaiuas float(10))";
         try {
             String query =sql.replace("$tableName",ntable);
             Connection con = ConnectionManager.getConnection();

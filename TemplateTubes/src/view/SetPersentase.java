@@ -172,7 +172,7 @@ public class SetPersentase extends JFrame {
                 float total=ptugas2+pkuis2+puts2+puas2;
                 
                 System.out.println(ptugas2);
-                if(total==100){
+                if(total==100.0){
                      String nmatkul =(String)matkul.getSelectedItem();
                     String ntable = MainSistem.nama + smatkul;
                     DataAkses.addPersentase(ntable, nmatkul, ptugas, pkuis, puts, puas);
