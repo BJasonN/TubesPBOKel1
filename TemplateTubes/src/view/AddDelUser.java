@@ -172,10 +172,23 @@ public class AddDelUser extends JFrame {
         btnSubmitDell.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //ambil data dari drop box
+                String nama = String.valueOf(cbbNama.getSelectedItem());
+                String pilihan2 = String.valueOf(cbbPilihan2.getSelectedItem());
+                //dapetin nama nama table
+                LinkedList<String> arrTable = DataAkses.listTable();
+                //linked list buat nampung yg mau dihapus
+                LinkedList<String> forDelete = new LinkedList<>();
+                //pindahin ke array kalo ada namanya
+                for(int i = 0; i < arrTable.size(); i++){
+                    for(int j = 1; j < 15; j++){
+                        if(arrTable.get(i).equals(nama+j)){
+                            forDelete.add(arrTable.get(i));
+                        }
+                    }
+                }
+                DataAkses.delUser(nama, pilihan2, forDelete);
                 JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus!");
-                //ga ada error tapi gabisa ngehapus
-                Object pilihan = cbbPilihan2.getSelectedItem();
-                DataAkses.delUser(String.valueOf(cbbNama.getSelectedItem()),String.valueOf(cbbPilihan2.getSelectedItem()));
             }
         });
         pnlIsi.add(btnSubmitDell);

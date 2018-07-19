@@ -150,7 +150,9 @@ public class InputMatkulDosen extends JFrame {
         return dimg;
     }
     
-
+    public static void main(String[] args) {
+        new InputMatkulDosen().setVisible(true);
+    }
     JPanel pnl1;
     JPanel pnlUtama;
     JLabel lblJudul;

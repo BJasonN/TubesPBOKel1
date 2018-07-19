@@ -192,7 +192,6 @@ public class DataAkses {
                 sql = "insert into dosenlogin(id,nama,password,gender)"
                         + "values('" + id + "','" + nama + "','" + pass + "','" + gender + "');";
 
-                st.executeUpdate(sql);
             }
             st.executeUpdate(sql);
         } catch (SQLException ex) {
@@ -200,7 +199,7 @@ public class DataAkses {
         }
     }
 
-    public static void delUser(String nama, String pilihan) {
+    public static void delUser(String nama, String pilihan, LinkedList<String> llTable) {
 
         if (pilihan.equals("Mahasiswa")) {
 
@@ -208,17 +207,29 @@ public class DataAkses {
                 Connection con = ConnectionManager.getConnection();
                 Statement st = con.createStatement();
                 String sql = "delete from mahasiswalogin where nama='" + nama + "'";
-                st.executeUpdate(sql);
+                for(int i = 0; i < llTable.size(); i++){
+                    String sql2 = new String();
+                    sql2 = "drop table "+llTable.get(i);
+                    st.addBatch(sql2);
+                }
+                st.addBatch(sql);
+                st.executeBatch();
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
         } else {
             try {
-                
+                System.out.println(nama);
                 Connection con = ConnectionManager.getConnection();
-                Statement st = con.createStatement();
-                String sql = "delete from dosenlogin where nama='" + nama + "'";
-                st.executeUpdate(sql);
+                Statement st = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+                String sql = "delete from dosenlogin where nama='" + nama + "';";
+                for(int i = 0; i < llTable.size(); i++){
+                    String sql2 = new String();
+                    sql2 = "drop table "+llTable.get(i);
+                    st.addBatch(sql2);
+                }
+                st.addBatch(sql);
+                st.executeBatch();
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
@@ -309,10 +320,10 @@ public class DataAkses {
         String sql = "create table if not exists $tableName("
             +"matkul varchar(20),"
             +"sks int(2),"
-            +"nilai tugas float(10),"
-            +"nilai kuis float(10),"
-            +"nilai uts float(10),"
-            +"nilai uas float(10))";
+            +"nilaitugas float(10),"
+            +"nilaikuis float(10),"
+            +"nilaiuts float(10),"
+            +"nilaiuas float(10))";
         try {
             String query =sql.replace("$tableName",ntable);
             Connection con = ConnectionManager.getConnection();
