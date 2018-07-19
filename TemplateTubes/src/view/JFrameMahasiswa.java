@@ -78,7 +78,7 @@ public class JFrameMahasiswa extends JFrame{
         kehadiran.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Kehadiran().setVisible(true);
+//                new Kehadiran().setVisible(true);
             }
         });
         pnl1.add(kehadiran);

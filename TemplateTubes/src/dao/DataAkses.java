@@ -345,7 +345,7 @@ public class DataAkses {
    //untuk tambah matkul yang ditambah diambil matkul
     public static void addMatkulMhs(String ntable, String matkul, String sks) {
         
-        String sql = "insert into $tableName values('"+matkul +"','" + sks + "','0.0','0.0','0.0','0.0','a')";
+        String sql = "insert into $tableName()values('"+matkul +"','" + sks + "','0.0','0.0','0.0','0.0','a')";
         try {
             String query =sql.replace("$tableName",ntable);
             Connection con = ConnectionManager.getConnection();
@@ -498,13 +498,13 @@ public class DataAkses {
         return daftarsaran;
     }
 
-    public static void inputNilai(String tugas, String kuis, String uts, String uas, String nama, String matkul, String sem,String namadosen) {
+    public static void inputNilai(String tugas, String kuis, String uts, String uas, String nama, String matkul, String sem,String namadosen,char index) {
         try {
             Connection con = ConnectionManager.getConnection();
             Statement st = con.createStatement();
             String namaTable = nama+sem;
-            char index=hitungNilai(tugas,kuis,uts,uas,matkul,sem,namadosen);
-            
+//            char index=hitungNilai(tugas,kuis,uts,uas,matkul,sem,namadosen);
+//            System.out.println(index);
             String sql = "update "+namaTable+" set nilaitugas = "+Float.valueOf(tugas)+","
                     + "nilaikuis = "+Float.valueOf(kuis)+","
                     + "nilaiuts = "+Float.valueOf(uts)+","
@@ -516,6 +516,7 @@ public class DataAkses {
             ex.printStackTrace();
         }
     }
+    //ambil presentase nilai dari db dosen
     public static Matkul getPersentase(String matkul,String ntable){
         String sql = "select * from "+ntable+" where matkul='"+matkul+"';";
         Matkul dmatkul= new Matkul();
@@ -526,10 +527,16 @@ public class DataAkses {
             Statement st = con.createStatement();
             ResultSet rs=st.executeQuery(sql);
             
-            float ptugas=Float.valueOf(rs.getString("ptugas"));
-            float pkuis=Float.valueOf(rs.getString("pkuis"));
-            float puts=Float.valueOf(rs.getString("puts"));
-            float puas=Float.valueOf(rs.getString("puas"));
+            float ptugas=0;
+            float pkuis=0;
+            float puts=0;
+            float puas=0;
+            while(rs.next()){
+                ptugas = Float.valueOf(rs.getString("ptugas"));
+                pkuis = Float.valueOf(rs.getString("pkuis"));
+                puts = Float.valueOf(rs.getString("puts"));
+                puas = Float.valueOf(rs.getString("puas"));
+            }
             
             HashMap<String,Float>lpmatkul=new HashMap<>();
             lpmatkul.put("tugas", ptugas);
@@ -543,15 +550,16 @@ public class DataAkses {
         }
         return dmatkul;
     }
+    //mengubah total nilai menjadi index
     public static char hitungNilai(String tugas,String kuis,String uts,String uas,String matkul,String sem,String namadosen){
         String namaTable2=namadosen+sem;
         char index;
         Matkul dmatkul=getPersentase(matkul,namaTable2);
         
-        float ptugas=dmatkul.getPresentaseNilai().get("tugas");
-        float pkuis=dmatkul.getPresentaseNilai().get("kuis");
-        float puts=dmatkul.getPresentaseNilai().get("uts");
-        float puas=dmatkul.getPresentaseNilai().get("uas");
+        float ptugas=(dmatkul.getPresentaseNilai().get("tugas"))/100;
+        float pkuis=(dmatkul.getPresentaseNilai().get("kuis"))/100;
+        float puts=(dmatkul.getPresentaseNilai().get("uts"))/100;
+        float puas=(dmatkul.getPresentaseNilai().get("uas"))/100;
         float nakhir=ptugas*Float.valueOf(tugas)+pkuis*Float.valueOf(kuis)+puts*Float.valueOf(uts)+puas*Float.valueOf(uas);
         
         

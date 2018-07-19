@@ -144,7 +144,8 @@ public class InputNilai extends JFrame{
                 String sem = String.valueOf(cbbSemester.getSelectedItem());
                 String namaMhs = String.valueOf(cbbMhs.getSelectedItem());
                 String matkul = String.valueOf(cbbMatKul.getSelectedItem());
-                DataAkses.inputNilai(tugas, kuis, uts, uas, namaMhs, matkul, sem,MainSistem.nama);
+                char sks = DataAkses.hitungNilai(tugas, kuis, uts, uas, matkul, sem, MainSistem.nama);
+                DataAkses.inputNilai(tugas, kuis, uts, uas, namaMhs, matkul, sem,MainSistem.nama, sks);
                 JOptionPane.showMessageDialog(null, "Data berhasil terinput!");
             }
         });
