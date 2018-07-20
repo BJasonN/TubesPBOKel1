@@ -141,13 +141,13 @@ public class JFrameMahasiswa extends JFrame{
         return dimg;
     }
     
-    JLabel lblmhs;
-    JLabel lblJudul;
-    JButton lnilai;
-    JButton kehadiran;
-    JButton roster;
-    JButton saran;
-    JButton logout;
-    JPanel pnlUtama;
-    JPanel pnl1;
+    private JLabel lblmhs;
+    private JLabel lblJudul;
+    private JButton lnilai;
+    private JButton kehadiran;
+    private JButton roster;
+    private JButton saran;
+    private JButton logout;
+    private JPanel pnlUtama;
+    private JPanel pnl1;
 }

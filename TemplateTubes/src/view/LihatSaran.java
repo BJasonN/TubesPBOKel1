@@ -92,5 +92,8 @@ public class LihatSaran extends JFrame{
     private JTable table;
     private JScrollPane scroll;
     private JLabel lbllihatsaran;
+<<<<<<< HEAD
     private JButton back;
+=======
+>>>>>>> 77e3cc55779dac7ea652646dba4484acbdf0303a
 }

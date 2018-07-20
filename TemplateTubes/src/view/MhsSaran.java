@@ -125,16 +125,16 @@ public class MhsSaran extends JFrame{
         return dimg;
     }
 
-    JPanel pnlUtama;
-    JPanel pnl1;
-    JLabel lblJudul;
-    JLabel saran;
-    JLabel lblmahasiswa;
-    JLabel lblnim;
-    JLabel lblsaranmhs;
-    JButton submit;
-    JButton back;
-    JTextArea nim;
-    JTextArea mhs;
-    JTextArea saranmhs;
+    private JPanel pnlUtama;
+    private JPanel pnl1;
+    private JLabel lblJudul;
+    private JLabel saran;
+    private JLabel lblmahasiswa;
+    private JLabel lblnim;
+    private JLabel lblsaranmhs;
+    private JButton submit;
+    private JButton back;
+    private JTextArea nim;
+    private JTextArea mhs;
+    private JTextArea saranmhs;
 }

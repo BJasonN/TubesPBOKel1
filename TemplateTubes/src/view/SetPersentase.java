@@ -212,24 +212,24 @@ public class SetPersentase extends JFrame {
         new SetPersentase().setVisible(true);
     }
 
-    JPanel pnl1;
-    JPanel pnlUtama;
-    JLabel lblpersen;
-    JLabel lblJudul;
-    JLabel lblsetpersen;
-    JLabel lblmatkul;
-    JLabel lblnilaikuis;
-    JLabel lblnilaitugas;
-    JLabel lblnilaiUts;
-    JLabel lblnilaiUas;
-    JLabel lblsem;
-    JButton search;
-    JButton submit;
-    JButton back;
-    JTextField kuis;
-    JTextField tugas;
-    JTextField uts;
-    JTextField uas;
-    JComboBox matkul;
-    JComboBox sem;
+    private JPanel pnl1;
+    private JPanel pnlUtama;
+    private JLabel lblpersen;
+    private JLabel lblJudul;
+    private JLabel lblsetpersen;
+    private JLabel lblmatkul;
+    private JLabel lblnilaikuis;
+    private JLabel lblnilaitugas;
+    private JLabel lblnilaiUts;
+    private JLabel lblnilaiUas;
+    private JLabel lblsem;
+    private JButton search;
+    private JButton submit;
+    private JButton back;
+    private JTextField kuis;
+    private JTextField tugas;
+    private JTextField uts;
+    private JTextField uas;
+    private JComboBox matkul;
+    private JComboBox sem;
 }
