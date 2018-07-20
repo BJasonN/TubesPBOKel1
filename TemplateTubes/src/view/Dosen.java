@@ -104,6 +104,7 @@ public class Dosen extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 if(ConnectionManager.cutConnection()== true){
                     dispose();
+                    new Login().setVisible(true);
                 }
             }
         });

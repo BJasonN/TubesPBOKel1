@@ -9,11 +9,14 @@ import dao.DataAkses;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -61,6 +64,16 @@ public class LihatSaran extends JFrame{
         scroll= new JScrollPane(table);
         scroll.setBounds(40, 300, 900, 100);
         pnl1.add(scroll);
+        back= new JButton("back");
+        back.setBounds(550,500, 100, 20);
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new Admin().setVisible(true);
+            }
+        });
+        pnl1.add(back);
     }
     
         private Image resizeImage(String url){
@@ -73,10 +86,11 @@ public class LihatSaran extends JFrame{
         }
         return dimg;
     }
-    JPanel pnl1;
-    JPanel pnlUtama;
-    JLabel lblJudul;
-    JTable table;
-    JScrollPane scroll;
-    JLabel lbllihatsaran;
+    private JPanel pnl1;
+    private JPanel pnlUtama;
+    private JLabel lblJudul;
+    private JTable table;
+    private JScrollPane scroll;
+    private JLabel lbllihatsaran;
+    private JButton back;
 }

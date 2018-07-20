@@ -55,6 +55,7 @@ public class ConnectionManager {
     private static void logOff(){
         try {
             connection.close();
+            connection = null;
             System.out.println("Connection close");
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);

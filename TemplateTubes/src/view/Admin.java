@@ -124,12 +124,13 @@ public class Admin extends JFrame{
         pnlIsi.add(btnSaran);
         
         btnLogOut = new JButton("Log Out");
-        btnLogOut.setBounds(350, 250, 300, 25);
+        btnLogOut.setBounds(550, 150, 300, 25);
         btnLogOut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(ConnectionManager.cutConnection()== true){
                     dispose();
+                    new Login().setVisible(true);
                 }
             }
         });

@@ -41,6 +41,7 @@ public class DataAkses {
 
                 while (rs.next()) {
                     lNama.add(rs.getString(2));
+                    System.out.println(rs.getString(2));
                 }
                 arrNama = new String[lNama.size()];
                 for (int i = 0; i < lNama.size(); i++) {
@@ -117,6 +118,24 @@ public class DataAkses {
         }
         return lNamaD;
     }
+    
+    public static Orang getIdAdmin(){
+        Orang admin = new Orang();
+        try {
+            Connection con = ConnectionManager.getConnection();
+            String sql = "select * from adminlogin";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                admin.setId(rs.getString("id"));
+                admin.setPassword(rs.getString("password"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return admin;
+    }
 
    //untuk mendapatkan nama dosen
     public static String[] getNamaDosen() {
@@ -142,7 +161,7 @@ public class DataAkses {
         return namaM;
     }
 
-    public static List<String> getNilaiMhs(String ntable, String tahun) {
+    public static List<String> getNilaiMhs(String ntable) {
         List<String> ListData = new ArrayList();
         String sql = "select * from "+ntable;
         try {

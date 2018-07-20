@@ -60,9 +60,13 @@ public class LihatNilai extends JFrame{
         lblLihat.setBounds(170, 40, 400, 50);
         pnlIsi.add(lblLihat);
         
+        lblSem = new JLabel("Semester : ");
+        lblSem.setBounds(100, 100, 100, 25);
+        pnlIsi.add(lblSem);
+        
         Object[] sem = {"1", "2", "3", "4", "5", "6", "7", "8"};
         cbbSem = new JComboBox(sem);
-        cbbSem.setBounds(150, 100, 100, 25);
+        cbbSem.setBounds(170, 100, 100, 25);
         pnlIsi.add(cbbSem);
         
 //        Object[] thnSem = {"2014", "2015", "2016", "2017", "2018"};
@@ -78,13 +82,14 @@ public class LihatNilai extends JFrame{
                 String[] ArrData ={};
                 List<String> ListData = new ArrayList();
                 //ambil tahun dan semester dari combo box
-                String tahun = (String) cbbThnSem.getSelectedItem();
+//                String tahun = (String) cbbThnSem.getSelectedItem();
                 String smt = (String) cbbSem.getSelectedItem();
+                
                 //ambil id mahasiswa yang sedang login
                 String idAktif = MainSistem.nama;
                 String ntable = idAktif+smt;
                 //isi tabel didapatkan dari akses database
-                ListData = DataAkses.getNilaiMhs(ntable, tahun);
+                ListData = DataAkses.getNilaiMhs(ntable);
 //                ArrData = ListData.toArray(new String[ListData.size()]);//gimana caranya ga error==>lu masukin array 1D ke 2D
                 //bangun array berisi header dan isi tabel
                 String[] header = {"Matkul", "Tugas","Kuis", "UTS", "UAS", "Index"};
@@ -116,6 +121,9 @@ public class LihatNilai extends JFrame{
         }
         return dimg;
     }
+    public static void main(String[] args) {
+        new LihatNilai().setVisible(true);
+    }
     
     private JPanel pnlUtama;
     private JPanel pnlIsi;
@@ -126,4 +134,5 @@ public class LihatNilai extends JFrame{
     private JTable tblLihatNilai;
     private JScrollPane scroll;
     private JButton btnSubmit;
+    private JLabel lblSem;
 }

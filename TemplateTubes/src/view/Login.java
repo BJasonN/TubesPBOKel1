@@ -107,21 +107,21 @@ public class Login extends JFrame {
                 Object setLogIn = login.getSelectedItem();
                 sid = id.getText();//dibuat public diatas agar gampang cari data lihat nilai
                 String spassword = password.getText();
-                
+
                 //untuk masuk ke mahasiswa
                 if (setLogIn.equals("Mahasiswa")) {
-                    Mahasiswa cth=null;
+                    Mahasiswa cth = null;
                     ArrayList<Mahasiswa> siswa = DataAkses.getUsernameMhs("Mahasiswa");
                     boolean cek = false, cek2 = false;
                     int i = 0;
                     while (!cek && i < siswa.size() && !cek2) {
                         cth = siswa.get(i);
-                        
+
                         //untuk cek id
                         if (cth.getId().equals(sid)) {
                             cek = true;
                         }
-                       
+
                         //untuk cek password
                         if (cth.getPassword().equals(spassword)) {
                             cek2 = true;
@@ -131,9 +131,9 @@ public class Login extends JFrame {
                     if (!cek) {
                         JOptionPane.showMessageDialog(null, "ID salah");
                     } else {
-                       if (cek2) {
+                        if (cek2) {
                             MainSistem.nama = cth.getNama();
-                            MainSistem.nim= cth.getId();
+                            MainSistem.nim = cth.getId();
                             dispose();
                             new JFrameMahasiswa().setVisible(true);
                         } else {
@@ -141,18 +141,18 @@ public class Login extends JFrame {
                         }
                     }
                 } else if (setLogIn.equals("Dosen")) {
-                    Orang dth=null;
+                    Orang dth = null;
                     ArrayList<Orang> dosen = DataAkses.getUsernameDosen("Mahasiswa");
                     boolean cek = false, cek2 = false;
                     int i = 0;
                     while (!cek && i < dosen.size() && !cek2) {
                         dth = dosen.get(i);
-                        
+
                         //untuk cek id
                         if (dth.getId().equals(sid)) {
                             cek = true;
                         }
-                       
+
                         //untuk cek password
                         if (dth.getPassword().equals(spassword)) {
                             cek2 = true;
@@ -162,24 +162,39 @@ public class Login extends JFrame {
                     if (!cek) {
                         JOptionPane.showMessageDialog(null, "ID salah");
                     } else {
-                       if (cek2) {
+                        if (cek2) {
                             MainSistem.nama = dth.getNama();
-                            MainSistem.nim= dth.getId();
+                            MainSistem.nim = dth.getId();
                             dispose();
                             new Dosen().setVisible(true);;
                         } else {
                             JOptionPane.showMessageDialog(null, "Password salah");
                         }
                     }
-                    
+
                 } else {
-                    if (sid.equals("admin") && spassword.equals("ada")) {
-                        dispose();
-                        new Admin().setVisible(true);
+                    Orang ath = DataAkses.getIdAdmin();
+                    boolean cek = false, cek2 = false;
+
+                    //untuk cek id
+                    if (ath.getId().equals(sid)) {
+                        cek = true;
+                    }
+                    //untuk cek password
+                    if (ath.getPassword().equals(spassword)) {
+                        cek2 = true;
+                    }
+                    
+                    //JIKA CEK ID SALAH
+                    if (!cek) {
+                        JOptionPane.showMessageDialog(null, "ID salah");
                     } else {
-                        if (!sid.equals("admin")) {
-                            JOptionPane.showMessageDialog(null, "ID salah");
-                        } else if (!spassword.equals("ada")) {
+                        if (cek2) {
+                            MainSistem.nama = ath.getNama();
+                            MainSistem.nim = ath.getId();
+                            dispose();
+                            new Admin().setVisible(true);
+                        } else {
                             JOptionPane.showMessageDialog(null, "Password salah");
                         }
                     }
