@@ -155,13 +155,16 @@ public class AddDelUser extends JFrame {
         btnCari.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                System.out.println("Action listener jalan");
                 String[] arrNama = DataAkses.getNama(String.valueOf(cbbPilihan2.getSelectedItem()));
+//                DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(arrNama);
+//                JComboBox<String> cbbNama = new JComboBox<>(model);
                 cbbNama = new JComboBox(arrNama);
                 cbbNama.setSize(170, 20);
                 cbbNama.setLocation(400, 240);
                 pnlIsi.add(cbbNama);
-                pnlIsi.repaint();
+                cbbNama.revalidate();
+                cbbNama.repaint();
             }
         });
         pnlIsi.add(btnCari);

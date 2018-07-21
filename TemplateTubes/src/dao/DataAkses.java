@@ -33,6 +33,7 @@ public class DataAkses {
         String[] arrNama = {};
         List<String> lNama = new ArrayList<>();
         if (pilih.equals("Mahasiswa")) {
+            System.out.println("kepilih mahasiswa");
             try {
                 Connection con = ConnectionManager.getConnection();
                 String sql = "select * from mahasiswalogin";
@@ -51,6 +52,7 @@ public class DataAkses {
                 ex.printStackTrace();
             }
         } else {
+            System.out.println("kepilih dosen");
             try {
                 Connection con = ConnectionManager.getConnection();
                 String sql = "select * from dosenlogin";
@@ -59,6 +61,7 @@ public class DataAkses {
 
                 while (rs.next()) {
                     lNama.add(rs.getString(2));
+                    System.out.println(rs.getString(2));
                 }
                 arrNama = new String[lNama.size()];
                 for (int i = 0; i < lNama.size(); i++) {
