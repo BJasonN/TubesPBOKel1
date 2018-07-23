@@ -1,4 +1,4 @@
-package view;
+package viewDosen;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -10,6 +10,7 @@ package view;
  *
  * @author USER
  */
+import viewDosen.Dosen;
 import dao.DataAkses;
 import javax.swing.*;
 import java.awt.*;

@@ -1,6 +1,7 @@
-package view;
+package viewAdmin;
 
 
+import viewAdmin.AddDelUser;
 import dao.ConnectionManager;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -17,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+import view.Login;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

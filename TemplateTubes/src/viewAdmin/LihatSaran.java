@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package viewAdmin;
 
+import viewAdmin.Admin;
 import dao.DataAkses;
 import java.awt.Color;
 import java.awt.Font;

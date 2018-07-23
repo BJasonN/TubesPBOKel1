@@ -1,4 +1,5 @@
-package view;
+package viewAdmin;
+import viewAdmin.Admin;
 import sistem.Roster;
 /*
  * To change this license header, choose License Headers in Project Properties.

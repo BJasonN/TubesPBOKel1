@@ -1,4 +1,4 @@
-package view;
+package viewMhs;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -7,6 +7,7 @@ package view;
  */
 
 
+import viewMhs.LihatNilai;
 import dao.ConnectionManager;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -25,6 +26,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+import view.LiatRoster;
+import view.Login;
 
 /**
  *

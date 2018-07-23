@@ -1,4 +1,4 @@
-package view;
+package viewMhs;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -7,6 +7,7 @@ package view;
  */
 
 
+import viewMhs.JFrameMahasiswa;
 import dao.DataAkses;
 import java.awt.Color;
 import java.awt.Font;

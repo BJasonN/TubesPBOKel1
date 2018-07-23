@@ -1,4 +1,4 @@
-package view;
+package viewAdmin;
 
 import sistem.Mahasiswa;
 /*

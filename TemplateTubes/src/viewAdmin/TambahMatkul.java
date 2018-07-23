@@ -1,4 +1,4 @@
-package view;
+package viewAdmin;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -10,6 +10,7 @@ package view;
  *
  * @author kevin
  */
+import viewAdmin.Admin;
 import dao.DataAkses;
 import java.awt.*;
 import java.awt.event.ActionEvent;

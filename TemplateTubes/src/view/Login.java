@@ -5,6 +5,9 @@ package view;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import viewMhs.JFrameMahasiswa;
+import viewDosen.Dosen;
+import viewAdmin.Admin;
 import dao.ConnectionManager;
 import dao.DataAkses;
 import java.sql.Connection;
