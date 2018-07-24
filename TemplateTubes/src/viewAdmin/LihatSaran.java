@@ -6,7 +6,7 @@
 package viewAdmin;
 
 import viewAdmin.Admin;
-import dao.DataAkses;
+import dao.DataAksesAdmin;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -60,7 +60,7 @@ public class LihatSaran extends JFrame{
         lbllihatsaran.setFont(new Font("Arial",Font.BOLD,18));
         
         String []judul = {"NIM","Nama","FeedBack"};
-        String[][]lihatsaran=DataAkses.getSaran();
+        String[][]lihatsaran=DataAksesAdmin.getSaran();
         table = new JTable(lihatsaran,judul);
         scroll= new JScrollPane(table);
         scroll.setBounds(40, 300, 900, 100);

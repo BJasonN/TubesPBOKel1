@@ -1,4 +1,4 @@
-package view;
+package viewAll;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -9,7 +9,7 @@ package view;
  *
  * @author kevin
  */
-import dao.DataAkses;
+import dao.DataAksesAll;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -63,7 +63,7 @@ public class LiatRoster extends JFrame {
                 //table roster
                 String minggu = String.valueOf(cbbMinggu.getSelectedItem());
                 //hasi dari database ditampung llRoster
-                LinkedList<Roster> llRoster = DataAkses.viewRoster(minggu);
+                LinkedList<Roster> llRoster = DataAksesAll.viewRoster(minggu);
                 //
                 Object[] judul = {"Jam","Senin","Selasa","Rabu","Kamis","Juamat","Sabtu"};
                 Object[][] row = new Object[11][7];
@@ -129,9 +129,7 @@ public class LiatRoster extends JFrame {
         return a;
     }
     
-    public static void main(String[] args) {
-        new LiatRoster().setVisible(true);
-    }
+    
     
     private JPanel pnlUtama;
     private JLabel lblJudul;

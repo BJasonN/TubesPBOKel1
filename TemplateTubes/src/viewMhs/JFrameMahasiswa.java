@@ -26,8 +26,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
-import view.LiatRoster;
-import view.Login;
+import viewAll.LiatRoster;
+import viewAll.Login;
 
 /**
  *

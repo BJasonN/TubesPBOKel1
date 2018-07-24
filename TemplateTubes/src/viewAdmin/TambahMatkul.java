@@ -11,7 +11,7 @@ package viewAdmin;
  * @author kevin
  */
 import viewAdmin.Admin;
-import dao.DataAkses;
+import dao.DataAksesAdmin;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -86,7 +86,7 @@ public class TambahMatkul extends JFrame{
                 String nama = txtMatkul.getText();
                 String kode=txtKodeMatkul.getText();
                 int sks = Integer.parseInt(jumlah.getText());
-                DataAkses.addMatkul(nama, kode, sks);
+                DataAksesAdmin.addMatkul(nama, kode, sks);
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diinput!");
             }
         });
@@ -114,9 +114,7 @@ public class TambahMatkul extends JFrame{
         }
         return dimg;
     }
-    public static void main(String[] args) {
-        new TambahMatkul().setVisible(true);
-    }
+    
     
     private JPanel pnlUtama;
     private JLabel lblJudul;

@@ -11,7 +11,7 @@ import sistem.Roster;
  *
  * @author Kevin
  */
-import dao.DataAkses;
+import dao.DataAksesAdmin;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -103,7 +103,7 @@ public class EditRoster extends JFrame{
                 String jam = String.valueOf(cbbWaktu.getSelectedItem());
                 String hari = String.valueOf(cbbHari.getSelectedItem());
                 
-                DataAkses.addRoster(dosen, matkul, tgl, ruangan, jam, hari);
+                DataAksesAdmin.addRoster(dosen, matkul, tgl, ruangan, jam, hari);
             }
         });
         pnlIsi.add(btnSubmit);
@@ -162,7 +162,7 @@ public class EditRoster extends JFrame{
                 String jam = String.valueOf(cbbDelWaktu.getSelectedItem());
                 String hari = String.valueOf(cbbDelHari.getSelectedItem());
                 String tgl = String.valueOf(cbbDelTgl.getSelectedItem());
-                DataAkses.delRoster(jam, hari, tgl);
+                DataAksesAdmin.delRoster(jam, hari, tgl);
             }
         });
         pnlIsi.add(btnDel);
@@ -176,7 +176,7 @@ public class EditRoster extends JFrame{
                 //table roster
                 String minggu = String.valueOf(cbbMinggu.getSelectedItem());
                 //hasi dari database ditampung llRoster
-                LinkedList<Roster> llRoster = DataAkses.viewRoster(minggu);
+                LinkedList<Roster> llRoster = DataAksesAdmin.viewRoster(minggu);
                 //
                 Object[] judul = {"Jam","Senin","Selasa","Rabu","Kamis","Juamat","Sabtu"};
                 Object[][] row = new Object[11][7];

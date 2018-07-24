@@ -8,7 +8,7 @@ package viewMhs;
 
 
 import viewMhs.JFrameMahasiswa;
-import dao.DataAkses;
+import dao.DataAksesMhs;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -97,7 +97,7 @@ public class MhsSaran extends JFrame{
                 String nama = mhs.getText();
                 String inim = nim.getText();
                 String saran = saranmhs.getText();
-                DataAkses.addSaran(nama, inim, saran);
+                DataAksesMhs.addSaran(nama, inim, saran);
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diinput!");
             }
         });

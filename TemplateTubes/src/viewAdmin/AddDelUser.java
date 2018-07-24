@@ -11,7 +11,7 @@ import sistem.Mahasiswa;
  *
  * @author kevin
  */
-import dao.DataAkses;
+import dao.DataAksesAdmin;
 
 import dao.ConnectionManager;
 import java.sql.Connection;
@@ -112,7 +112,7 @@ public class AddDelUser extends JFrame {
                 } else {
                     radioText = "M";
                 }
-                DataAkses.addUser(nama, id, password, radioText, String.valueOf(cbbPilihan.getSelectedItem()));
+                DataAksesAdmin.addUser(nama, id, password, radioText, String.valueOf(cbbPilihan.getSelectedItem()));
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diinput!");
             }
         });
@@ -156,7 +156,7 @@ public class AddDelUser extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Action listener jalan");
-                String[] arrNama = DataAkses.getNama(String.valueOf(cbbPilihan2.getSelectedItem()));
+                String[] arrNama = DataAksesAdmin.getNama(String.valueOf(cbbPilihan2.getSelectedItem()));
 //                DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(arrNama);
 //                JComboBox<String> cbbNama = new JComboBox<>(model);
                 cbbNama = new JComboBox(arrNama);
@@ -179,7 +179,7 @@ public class AddDelUser extends JFrame {
                 String nama = String.valueOf(cbbNama.getSelectedItem());
                 String pilihan2 = String.valueOf(cbbPilihan2.getSelectedItem());
                 //dapetin nama nama table
-                LinkedList<String> arrTable = DataAkses.listTable();
+                LinkedList<String> arrTable = DataAksesAdmin.listTable();
                 //linked list buat nampung yg mau dihapus
                 LinkedList<String> forDelete = new LinkedList<>();
                 //pindahin ke array kalo ada namanya
@@ -190,7 +190,7 @@ public class AddDelUser extends JFrame {
                         }
                     }
                 }
-                DataAkses.delUser(nama, pilihan2, forDelete);
+                DataAksesAdmin.delUser(nama, pilihan2, forDelete);
                 JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus!");
             }
         });
@@ -219,9 +219,7 @@ public class AddDelUser extends JFrame {
         return dimg;
     }
     
-    public static void main(String[] args) {
-        new AddDelUser().setVisible(true);
-    }
+    
 
     private JPanel pnlUtama;
     private JLabel lblJudul;

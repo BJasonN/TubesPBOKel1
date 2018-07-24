@@ -1,6 +1,6 @@
 package viewMhs;
 
-import dao.DataAkses;
+import dao.DataAksesMhs;
 import sistem.MainSistem;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -89,7 +89,7 @@ public class LihatNilai extends JFrame{
                 String idAktif = MainSistem.nama;
                 String ntable = idAktif+smt;
                 //isi tabel didapatkan dari akses database
-                ListData = DataAkses.getNilaiMhs(ntable);
+                ListData = DataAksesMhs.getNilaiMhs(ntable);
 //                ArrData = ListData.toArray(new String[ListData.size()]);//gimana caranya ga error==>lu masukin array 1D ke 2D
                 //bangun array berisi header dan isi tabel
                 String[] header = {"Matkul", "Tugas","Kuis", "UTS", "UAS", "Index"};
@@ -121,9 +121,7 @@ public class LihatNilai extends JFrame{
         }
         return dimg;
     }
-    public static void main(String[] args) {
-        new LihatNilai().setVisible(true);
-    }
+    
     
     private JPanel pnlUtama;
     private JPanel pnlIsi;

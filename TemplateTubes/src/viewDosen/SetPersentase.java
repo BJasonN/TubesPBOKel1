@@ -6,7 +6,7 @@ package viewDosen;
  * and open the template in the editor.
  */
 import viewDosen.Dosen;
-import dao.DataAkses;
+import dao.DataAksesDosen;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -84,7 +84,7 @@ public class SetPersentase extends JFrame {
 
                 String smatkul = (String) sem.getSelectedItem();
                 String ntable = MainSistem.nama + smatkul;
-                LinkedList<String> ltable = DataAkses.listTable();
+                LinkedList<String> ltable = DataAksesDosen.listTable();
                 boolean cek = false;
                 int i = 0;
                 while (i < ltable.size() && cek == false) {
@@ -97,7 +97,7 @@ public class SetPersentase extends JFrame {
                 if (cek == false) {
                     JOptionPane.showMessageDialog(null, "Semester tersebut belum diinput matkul");
                 } else {
-                    lmatkul = DataAkses.getNamaMatkulPerDosen(ntable);
+                    lmatkul = DataAksesDosen.getNamaMatkulPerDosen(ntable);
                     lblmatkul = new JLabel("Mata Kuliah : ");
                     pnl1.add(lblmatkul);
                     lblmatkul.setBounds(380, 370, 100, 30);
@@ -176,7 +176,7 @@ public class SetPersentase extends JFrame {
                 if(total==100.0){
                      String nmatkul =(String)matkul.getSelectedItem();
                     String ntable = MainSistem.nama + smatkul;
-                    DataAkses.addPersentase(ntable, nmatkul, ptugas, pkuis, puts, puas);
+                    DataAksesDosen.addPersentase(ntable, nmatkul, ptugas, pkuis, puts, puas);
                     JOptionPane.showMessageDialog(null, "Data Berhasil Diinput!");
                 }else{
                     JOptionPane.showMessageDialog(null, "Data lebih besar atau lebih kecil dari 100%");
@@ -209,9 +209,7 @@ public class SetPersentase extends JFrame {
         return dimg;
     }
 
-    public static void main(String[] args) {
-        new SetPersentase().setVisible(true);
-    }
+    
 
     private JPanel pnl1;
     private JPanel pnlUtama;

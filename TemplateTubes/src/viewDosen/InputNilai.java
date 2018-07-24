@@ -11,7 +11,7 @@ package viewDosen;
  * @author USER
  */
 import viewDosen.Dosen;
-import dao.DataAkses;
+import dao.DataAksesDosen;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Image;
@@ -66,7 +66,7 @@ public class InputNilai extends JFrame{
         pnlIsi.add(lblNamaMhs);
         
         //ambil data nama mhs dari database
-        Object[] arrPilihMhs = DataAkses.getNama("Mahasiswa");
+        Object[] arrPilihMhs = DataAksesDosen.getNama("Mahasiswa");
         cbbMhs = new JComboBox(arrPilihMhs);
         cbbMhs.setSize(170, 20);
         cbbMhs.setLocation(390, 30);
@@ -78,7 +78,7 @@ public class InputNilai extends JFrame{
         pnlIsi.add(lblMatKul);
         
         //ambil data dari mata kuliah
-        ArrayList<Matkul> listMatkul= DataAkses.getNamaMatkul();
+        ArrayList<Matkul> listMatkul= DataAksesDosen.getNamaMatkul();
         String[] arrPilihMatKul = new String[listMatkul.size()];
         //kalau kosong
         arrPilihMatKul[0]="";
@@ -145,8 +145,8 @@ public class InputNilai extends JFrame{
                 String sem = String.valueOf(cbbSemester.getSelectedItem());
                 String namaMhs = String.valueOf(cbbMhs.getSelectedItem());
                 String matkul = String.valueOf(cbbMatKul.getSelectedItem());
-                char sks = DataAkses.hitungNilai(tugas, kuis, uts, uas, matkul, sem, MainSistem.nama);
-                DataAkses.inputNilai(tugas, kuis, uts, uas, namaMhs, matkul, sem,MainSistem.nama, sks);
+                char sks = DataAksesDosen.hitungNilai(tugas, kuis, uts, uas, matkul, sem, MainSistem.nama);
+                DataAksesDosen.inputNilai(tugas, kuis, uts, uas, namaMhs, matkul, sem,MainSistem.nama, sks);
                 JOptionPane.showMessageDialog(null, "Data berhasil terinput!");
             }
         });
@@ -175,9 +175,7 @@ public class InputNilai extends JFrame{
         return dimg;
     }
     
-    public static void main(String[] args) {
-        new InputNilai().setVisible(true);
-    }
+    
     
     private JPanel pnlUtama;
     private JLabel lblJudul;

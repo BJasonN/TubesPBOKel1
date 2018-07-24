@@ -8,7 +8,7 @@ package viewAdmin;
 
 
 import viewAdmin.Admin;
-import dao.DataAkses;
+import dao.DataAksesAdmin;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -68,7 +68,7 @@ public class InputMatkulMhs extends JFrame{
         lblmhs.setBounds(380,300, 100, 30);
         lblmhs.setFont(new Font("Arial",Font.PLAIN,15));
         
-        String[] llmhs = DataAkses.getNamaMhs();
+        String[] llmhs = DataAksesAdmin.getNamaMhs();
         mhs= new JComboBox(llmhs);
         mhs.setBounds(480,300 , 100, 20);
         pnl1.add(mhs);
@@ -79,7 +79,7 @@ public class InputMatkulMhs extends JFrame{
         lblinputmatkul.setBounds(380,350, 100, 30);
         lblinputmatkul.setFont(new Font("Arial",Font.PLAIN,15));
         
-        ArrayList<Matkul> lmatkul = DataAkses.getNamaMatkul();
+        ArrayList<Matkul> lmatkul = DataAksesAdmin.getNamaMatkul();
         String[] rmatkul = new String[lmatkul.size()];
         for (int i = 0; i < lmatkul.size(); i++) {
             rmatkul[i] = lmatkul.get(i).getNamaMatkul();
@@ -120,8 +120,8 @@ public class InputMatkulMhs extends JFrame{
                     i++;
                 }
                 String ntable = tmhs+ tsem;
-                DataAkses.addBuatTableMatkulMhs(ntable, tmatkul, sks);
-                DataAkses.addMatkulMhs(ntable, tmatkul, sks);
+                DataAksesAdmin.addBuatTableMatkulMhs(ntable, tmatkul, sks);
+                DataAksesAdmin.addMatkulMhs(ntable, tmatkul, sks);
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diinput!");
             }
         });
@@ -151,9 +151,7 @@ public class InputMatkulMhs extends JFrame{
         return dimg;
     }
     
-    public static void main(String[] args) {
-        new InputMatkulMhs().setVisible(true);
-    }
+    
     
     private JPanel pnl1;
     private JPanel pnlUtama;

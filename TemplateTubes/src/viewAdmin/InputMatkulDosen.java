@@ -6,7 +6,7 @@ package viewAdmin;
  * and open the template in the editor.
  */
 import viewAdmin.Admin;
-import dao.DataAkses;
+import dao.DataAksesAdmin;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -68,7 +68,7 @@ public class InputMatkulDosen extends JFrame {
         lbldosen.setBounds(380, 300, 100, 30);
         lbldosen.setFont(new Font("Arial", Font.BOLD, 15));
         
-        String[] lldosen = DataAkses.getNamaDosen();
+        String[] lldosen = DataAksesAdmin.getNamaDosen();
         dosen = new JComboBox(lldosen);
         dosen.setBounds(480, 300, 100, 20);
         pnl1.add(dosen);
@@ -78,7 +78,7 @@ public class InputMatkulDosen extends JFrame {
         lblmatkul.setBounds(380, 350, 100, 30);
         lblmatkul.setFont(new Font("Arial", Font.BOLD, 15));
 
-        ArrayList<Matkul> lmatkul = DataAkses.getNamaMatkul();
+        ArrayList<Matkul> lmatkul = DataAksesAdmin.getNamaMatkul();
         String[] rmatkul = new String[lmatkul.size()];
         for (int i = 0; i < lmatkul.size(); i++) {
             rmatkul[i] = lmatkul.get(i).getNamaMatkul();
@@ -120,8 +120,8 @@ public class InputMatkulDosen extends JFrame {
                 }
                 String ntable = tdosen + tsem;
 
-                DataAkses.addBuatTableMatkulDosen(ntable, tmatkul, sks);
-                DataAkses.addMatkulDosen(ntable, tmatkul, sks);
+                DataAksesAdmin.addBuatTableMatkulDosen(ntable, tmatkul, sks);
+                DataAksesAdmin.addMatkulDosen(ntable, tmatkul, sks);
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diinput!");
             }
         });
@@ -151,9 +151,7 @@ public class InputMatkulDosen extends JFrame {
         return dimg;
     }
     
-    public static void main(String[] args) {
-        new InputMatkulDosen().setVisible(true);
-    }
+    
     private JPanel pnl1;
     private JPanel pnlUtama;
     private JLabel lblJudul;

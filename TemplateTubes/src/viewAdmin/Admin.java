@@ -18,7 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
-import view.Login;
+import viewAll.Login;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -149,9 +149,7 @@ public class Admin extends JFrame{
         return dimg;
     }
     
-    public static void main(String[] args) {
-        new Admin().setVisible(true);
-    }
+    
     private JPanel pnlUtama;
     private JPanel pnlIsi;
     private JLabel lblJudul;

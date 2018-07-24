@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package sistem;
-import view.Login;
+import viewAll.Login;
 /**
  *
  * @author kevin

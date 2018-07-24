@@ -1,4 +1,4 @@
-package view;
+package viewAll;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -9,7 +9,7 @@ import viewMhs.JFrameMahasiswa;
 import viewDosen.Dosen;
 import viewAdmin.Admin;
 import dao.ConnectionManager;
-import dao.DataAkses;
+import dao.DataAksesAll;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -114,7 +114,7 @@ public class Login extends JFrame {
                 //untuk masuk ke mahasiswa
                 if (setLogIn.equals("Mahasiswa")) {
                     Mahasiswa cth = null;
-                    ArrayList<Mahasiswa> siswa = DataAkses.getUsernameMhs("Mahasiswa");
+                    ArrayList<Mahasiswa> siswa = DataAksesAll.getUsernameMhs("Mahasiswa");
                     boolean cek = false, cek2 = false;
                     int i = 0;
                     while (!cek && i < siswa.size() && !cek2) {
@@ -145,7 +145,7 @@ public class Login extends JFrame {
                     }
                 } else if (setLogIn.equals("Dosen")) {
                     Orang dth = null;
-                    ArrayList<Orang> dosen = DataAkses.getUsernameDosen("Mahasiswa");
+                    ArrayList<Orang> dosen = DataAksesAll.getUsernameDosen("Mahasiswa");
                     boolean cek = false, cek2 = false;
                     int i = 0;
                     while (!cek && i < dosen.size() && !cek2) {
@@ -176,7 +176,7 @@ public class Login extends JFrame {
                     }
 
                 } else {
-                    Orang ath = DataAkses.getIdAdmin();
+                    Orang ath = DataAksesAll.getIdAdmin();
                     boolean cek = false, cek2 = false;
 
                     //untuk cek id

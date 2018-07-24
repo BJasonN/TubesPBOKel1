@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package viewAll;
 
 import viewAdmin.Admin;
 import java.awt.Color;
@@ -89,10 +89,7 @@ public class Saran extends JFrame{
         return dimg;
     }
     
-    public static void main(String[] args) {
-        Saran saran = new Saran();
-        saran.setVisible(true);
-    }
+    
     
     JPanel pnlUtama;
     JPanel pnl1;
