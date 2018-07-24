@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -20,6 +21,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
+import sistem.NilaiMhsPerSemester;
+import sistem.NilaiSatuMatkulPerMhs;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -79,6 +82,7 @@ public class LihatNilai extends JFrame{
         btnSubmit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int i=0;
                 String[] ArrData ={};
                 List<String> ListData = new ArrayList();
                 //ambil tahun dan semester dari combo box
@@ -87,14 +91,28 @@ public class LihatNilai extends JFrame{
                 
                 //ambil id mahasiswa yang sedang login
                 String idAktif = MainSistem.nama;
-                String ntable = idAktif+smt;
                 //isi tabel didapatkan dari akses database
-                ListData = DataAksesMhs.getNilaiMhs(ntable);
+                NilaiMhsPerSemester nmhs = DataAksesMhs.getNilaiMhs(idAktif,smt);
+                ArrayList<NilaiSatuMatkulPerMhs>dnilai= nmhs.getDnilai();
+                
+                while(i<dnilai.size()){
+                    NilaiSatuMatkulPerMhs nmatkul=dnilai.get(i);
+                    HashMap<String,Integer> dmatkul= nmatkul.getNilai();
+                    int tugas= dmatkul.get("tugas");
+                    int kuis= dmatkul.get("kuis");
+                    int uts= dmatkul.get("uts");
+                    int uas= dmatkul.get("uas");
+                    String indeks=nmatkul.getIndeks();
+                    String matkul=nmatkul.getMatkul().getNamaMatkul();
+                    ListData.add(matkul+","+tugas+","+kuis+","+uts+","+uas+","+indeks);
+                    i++;
+                }
+                
 //                ArrData = ListData.toArray(new String[ListData.size()]);//gimana caranya ga error==>lu masukin array 1D ke 2D
                 //bangun array berisi header dan isi tabel
                 String[] header = {"Matkul", "Tugas","Kuis", "UTS", "UAS", "Index"};
                 String[][] isiPerRow = new String[ListData.size()][6];
-                for(int i = 0; i < ListData.size(); i++){
+                for(i = 0; i < ListData.size(); i++){
                     //dipecah
                     String[] arrSplit = ListData.get(i).split(",");
                     for(int j = 0; j < 6; j++){

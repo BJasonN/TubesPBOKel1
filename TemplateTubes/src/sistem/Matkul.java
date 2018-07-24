@@ -14,7 +14,7 @@ public class Matkul {
     private String namaMatkul, kodeMatkul;
     private int sks;
     private HashMap<String, Float> presentaseNilai;
-
+    
     public String getNamaMatkul() {
         return namaMatkul;
     }
